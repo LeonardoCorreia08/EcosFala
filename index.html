@@ -32,292 +32,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
     </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcosFala — Dando voz ao silêncio</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-<style>
-  :root {
-    --brand: #3b82f6;
-    --brand-dark: #1d4ed8;
-    --brand-light: #eff6ff;
-    --teal: #0d9488;
-    --teal-light: #f0fdfa;
-    --purple: #7c3aed;
-    --purple-light: #f5f3ff;
-    --amber: #d97706;
-    --amber-light: #fffbeb;
-    --coral: #e11d48;
-    --coral-light: #fff1f2;
-    --green: #16a34a;
-    --green-light: #f0fdf4;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-500: #6b7280;
-    --gray-700: #374151;
-    --gray-900: #111827;
-    --radius: 14px;
-    --radius-sm: 8px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Sora', sans-serif; background: var(--gray-50); color: var(--gray-900); line-height: 1.6; }
-
-  /* ── NAV ── */
-  nav { background: #fff; border-bottom: 1px solid var(--gray-200); position: sticky; top: 0; z-index: 100; }
-  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.35rem; color: var(--brand); text-decoration: none; }
-  .nav-logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; }
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--gray-500); font-size: 0.9rem; font-weight: 600; transition: color .2s; }
-  .nav-links a:hover { color: var(--brand); }
-  .nav-actions { display: flex; gap: .75rem; align-items: center; }
-  .btn { padding: .55rem 1.25rem; border-radius: 10px; font-size: .875rem; font-weight: 700; cursor: pointer; border: none; transition: all .2s; font-family: 'Sora', sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: .45rem; }
-  .btn-ghost { background: transparent; border: 1.5px solid var(--gray-200); color: var(--gray-700); }
-  .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
-  .btn-primary { background: linear-gradient(135deg, #4facfe, #00c6fb); color: #fff; box-shadow: 0 4px 14px rgba(79,172,254,.35); }
-  .btn-primary:hover { box-shadow: 0 6px 20px rgba(79,172,254,.5); transform: translateY(-1px); }
-  .btn-sm { padding: .4rem 1rem; font-size: .8rem; }
-  .btn-teal { background: var(--teal); color: #fff; }
-  .btn-purple { background: var(--purple); color: #fff; }
-  .btn-amber { background: var(--amber); color: #fff; }
-  .btn-coral { background: var(--coral); color: #fff; }
-  .btn-green { background: var(--green); color: #fff; }
-  .btn-danger { background: #ef4444; color: #fff; }
-
-  /* ── SECTIONS ── */
-  .section { display: none; min-height: calc(100vh - 64px); }
-  .section.active { display: block; }
-
-  /* ── HERO ── */
-  .hero { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 5rem 1.5rem 7rem; position: relative; overflow: hidden; }
-  .hero::after { content:''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: var(--gray-50); clip-path: ellipse(55% 100% at 50% 100%); }
-  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-  .hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.2rem; }
-  .hero p { font-size: 1.1rem; color: rgba(255,255,255,.9); margin-bottom: 2rem; max-width: 480px; }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .hero-btns .btn-white { background: #fff; color: var(--brand-dark); font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
-  .hero-btns .btn-white:hover { transform: translateY(-2px); }
-  .hero-btns .btn-outline-white { background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.6); color: #fff; }
-  .hero-visual { background: rgba(255,255,255,.15); border-radius: 24px; padding: 2rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.3); }
-  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .hero-stat { background: rgba(255,255,255,.2); border-radius: 14px; padding: 1.2rem; text-align: center; }
-  .hero-stat-num { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 900; color: #fff; }
-  .hero-stat-label { font-size: .78rem; color: rgba(255,255,255,.85); font-weight: 600; }
-
-  /* ── FEATURES ── */
-  .features { max-width: 1100px; margin: 4rem auto; padding: 0 1.5rem; }
-  .section-title { font-family: 'Nunito', sans-serif; font-size: 1.9rem; font-weight: 900; text-align: center; margin-bottom: .5rem; }
-  .section-sub { text-align: center; color: var(--gray-500); margin-bottom: 3rem; font-size: 1rem; }
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.75rem; cursor: pointer; transition: all .25s; }
-  .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: transparent; }
-  .card-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
-  .card-icon.blue { background: var(--brand-light); color: var(--brand); }
-  .card-icon.teal { background: var(--teal-light); color: var(--teal); }
-  .card-icon.purple { background: var(--purple-light); color: var(--purple); }
-  .card-icon.amber { background: var(--amber-light); color: var(--amber); }
-  .card-icon.coral { background: var(--coral-light); color: var(--coral); }
-  .card-icon.green { background: var(--green-light); color: var(--green); }
-  .card h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: .5rem; }
-  .card p { font-size: .88rem; color: var(--gray-500); line-height: 1.6; }
-  .card-badge { display: inline-block; padding: .25rem .75rem; border-radius: 99px; font-size: .72rem; font-weight: 700; margin-top: 1rem; }
-  .badge-blue { background: var(--brand-light); color: var(--brand-dark); }
-  .badge-teal { background: var(--teal-light); color: var(--teal); }
-  .badge-purple { background: var(--purple-light); color: var(--purple); }
-  .badge-amber { background: var(--amber-light); color: var(--amber); }
-  .badge-coral { background: var(--coral-light); color: var(--coral); }
-  .badge-green { background: var(--green-light); color: var(--green); }
-
-  /* ── APP SHELL (after login) ── */
-  .app-shell { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
-  .sidebar { background: #fff; border-right: 1px solid var(--gray-200); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: .35rem; }
-  .sidebar-user { display: flex; align-items: center; gap: .75rem; padding: 1rem; background: var(--gray-50); border-radius: 12px; margin-bottom: 1rem; }
-  .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: .9rem; flex-shrink: 0; }
-  .avatar-sm { width: 32px; height: 32px; font-size: .75rem; }
-  .sidebar-name { font-weight: 700; font-size: .88rem; }
-  .sidebar-role { font-size: .75rem; color: var(--gray-500); }
-  .sidebar-item { display: flex; align-items: center; gap: .75rem; padding: .7rem 1rem; border-radius: 10px; cursor: pointer; font-size: .875rem; font-weight: 600; color: var(--gray-700); transition: all .2s; text-decoration: none; }
-  .sidebar-item:hover, .sidebar-item.active { background: var(--brand-light); color: var(--brand); }
-  .sidebar-item i { width: 20px; text-align: center; }
-  .sidebar-section { font-size: .7rem; font-weight: 700; color: var(--gray-300); text-transform: uppercase; letter-spacing: .08em; padding: .75rem 1rem .25rem; }
-  .main-content { padding: 2rem; overflow-y: auto; }
-  .page-header { margin-bottom: 2rem; }
-  .page-header h2 { font-family: 'Nunito', sans-serif; font-size: 1.6rem; font-weight: 900; }
-  .page-header p { color: var(--gray-500); font-size: .9rem; }
-
-  /* ── DASHBOARD ── */
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
-  .stat-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.25rem; }
-  .stat-card .label { font-size: .78rem; color: var(--gray-500); font-weight: 600; margin-bottom: .35rem; }
-  .stat-card .value { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 900; }
-  .stat-card .delta { font-size: .78rem; color: var(--green); font-weight: 600; margin-top: .2rem; }
-  .stat-card .delta.neg { color: #ef4444; }
-
-  /* ── KANBAN ── */
-  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-  .kanban-col { background: var(--gray-50); border-radius: var(--radius); padding: 1rem; }
-  .kanban-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-  .kanban-col-title { font-weight: 800; font-size: .9rem; }
-  .kanban-count { background: var(--gray-200); color: var(--gray-700); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; }
-  .kanban-card { background: #fff; border-radius: 10px; border: 1px solid var(--gray-200); padding: 1rem; margin-bottom: .75rem; cursor: pointer; transition: box-shadow .2s; }
-  .kanban-card:hover { box-shadow: var(--shadow); }
-  .kanban-card-name { font-weight: 700; font-size: .875rem; margin-bottom: .2rem; }
-  .kanban-card-meta { font-size: .75rem; color: var(--gray-500); }
-  .kanban-card-value { font-size: .82rem; font-weight: 700; color: var(--green); margin-top: .5rem; }
-
-  /* ── AAC / PICTOGRAMS ── */
-  .aac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
-  .aac-card { background: #fff; border-radius: var(--radius); border: 2px solid var(--gray-200); padding: 1.25rem .75rem; text-align: center; cursor: pointer; transition: all .2s; user-select: none; }
-  .aac-card:hover { border-color: var(--brand); transform: scale(1.04); box-shadow: var(--shadow); }
-  .aac-card:active { transform: scale(.96); }
-  .aac-card.speaking { border-color: var(--teal); background: var(--teal-light); animation: pulse .6s ease; }
-  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
-  .aac-emoji { font-size: 2.5rem; margin-bottom: .5rem; }
-  .aac-label { font-size: .78rem; font-weight: 700; color: var(--gray-700); }
-  .aac-toolbar { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-  .aac-category-btn { padding: .4rem 1rem; border-radius: 99px; border: 1.5px solid var(--gray-200); background: #fff; font-size: .8rem; font-weight: 700; cursor: pointer; transition: all .2s; }
-  .aac-category-btn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
-  .aac-output { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1rem 1.25rem; margin-bottom: 1.5rem; min-height: 56px; display: flex; align-items: center; gap: .75rem; }
-  .aac-output-text { font-size: 1.1rem; font-weight: 700; color: var(--gray-900); flex: 1; }
-  .speaking-indicator { display: flex; align-items: center; gap: 4px; }
-  .speaking-bar { width: 3px; background: var(--teal); border-radius: 3px; animation: bar .6s ease-in-out infinite alternate; }
-  .speaking-bar:nth-child(2) { animation-delay: .1s; height: 14px; }
-  .speaking-bar:nth-child(1), .speaking-bar:nth-child(3) { height: 8px; }
-  @keyframes bar { to { transform: scaleY(2); } }
-
-  /* ── VOICE ENGINE ── */
-  .voice-panel { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 2rem; max-width: 680px; }
-  .record-btn { width: 80px; height: 80px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; transition: all .2s; margin: 1.5rem auto; }
-  .record-btn.idle { background: var(--coral-light); color: var(--coral); border: 3px solid var(--coral); }
-  .record-btn.recording { background: var(--coral); color: #fff; animation: recpulse 1s ease-in-out infinite; }
-  @keyframes recpulse { 0%,100% { box-shadow: 0 0 0 0 rgba(225,29,72,.4); } 50% { box-shadow: 0 0 0 16px rgba(225,29,72,0); } }
-  .waveform { height: 60px; background: var(--gray-50); border-radius: 10px; margin: 1rem 0; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 3px; padding: 0 1rem; }
-  .wave-bar { width: 4px; background: var(--brand); border-radius: 4px; transition: height .1s; }
-  .voice-phrase { display: flex; align-items: center; gap .75rem; background: var(--gray-50); border-radius: 10px; padding: .75rem 1rem; margin-bottom: .5rem; cursor: pointer; transition: background .2s; }
-  .voice-phrase:hover { background: var(--brand-light); }
-  .voice-phrase-icon { color: var(--coral); font-size: 1.1rem; flex-shrink: 0; margin-right: .75rem; }
-  .voice-phrase-text { font-weight: 600; font-size: .9rem; flex: 1; }
-
-  /* ── ANALYTICS ── */
-  .chart-bar-wrap { display: flex; align-items: flex-end; gap: 8px; height: 140px; }
-  .chart-bar { flex: 1; background: var(--brand); border-radius: 6px 6px 0 0; min-width: 24px; transition: background .2s; position: relative; cursor: pointer; }
-  .chart-bar:hover { background: var(--brand-dark); }
-  .chart-bar-label { text-align: center; font-size: .7rem; color: var(--gray-500); margin-top: .35rem; }
-  .chart-bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: .65rem; font-weight: 700; color: var(--brand-dark); white-space: nowrap; }
-  .progress-row { display: flex; align-items: center; gap: 1rem; margin-bottom: .85rem; }
-  .progress-label { font-size: .82rem; font-weight: 600; width: 120px; flex-shrink: 0; }
-  .progress-bar-bg { flex: 1; height: 8px; background: var(--gray-100); border-radius: 99px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
-  .progress-val { font-size: .78rem; font-weight: 700; width: 36px; text-align: right; }
-  .emotion-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .85rem; border-radius: 99px; font-size: .78rem; font-weight: 700; margin: .25rem; }
-
-  /* ── MODALS ── */
-  .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-  .modal { background: #fff; border-radius: 20px; padding: 2rem; max-width: 500px; width: 100%; box-shadow: var(--shadow-lg); position: relative; max-height: 90vh; overflow-y: auto; }
-  .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--gray-100); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; color: var(--gray-500); display: flex; align-items: center; justify-content: center; }
-  .modal-close:hover { background: var(--gray-200); }
-  .modal h3 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.3rem; margin-bottom: 1.5rem; }
-
-  /* ── FORMS ── */
-  .form-group { margin-bottom: 1.25rem; }
-  .form-label { display: block; font-size: .82rem; font-weight: 700; color: var(--gray-700); margin-bottom: .4rem; }
-  .form-input { width: 100%; padding: .65rem 1rem; border: 1.5px solid var(--gray-200); border-radius: 10px; font-size: .9rem; font-family: 'Sora', sans-serif; outline: none; transition: border-color .2s; background: #fff; }
-  .form-input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(59,130,246,.1); }
-  .form-select { width: 100%; padding: .65rem 1rem; border: 1.5px solid var(--gray-200); border-radius: 10px; font-size: .9rem; font-family: 'Sora', sans-serif; outline: none; background: #fff; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  /* ── BLOCKCHAIN ── */
-  .chain-panel { background: #0f172a; border-radius: var(--radius); padding: 2rem; color: #e2e8f0; }
-  .chain-panel h3 { font-family: 'Nunito', sans-serif; font-weight: 900; color: #fff; margin-bottom: .5rem; }
-  .chain-mono { font-family: monospace; font-size: .82rem; color: #94a3b8; }
-  .chain-hash { font-family: monospace; font-size: .75rem; color: #38bdf8; word-break: break-all; background: rgba(56,189,248,.1); padding: .5rem; border-radius: 6px; margin-top: .5rem; }
-  .chain-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; margin-right: 6px; animation: blink 1.5s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-  /* ── TOAST ── */
-  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--gray-900); color: #fff; padding: 1rem 1.5rem; border-radius: 12px; font-size: .875rem; font-weight: 600; z-index: 300; display: flex; align-items: center; gap: .75rem; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all .3s; pointer-events: none; }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.success .toast-icon { color: #4ade80; }
-  .toast.error .toast-icon { color: #f87171; }
-
-  /* ── LOGIN PAGE ── */
-  .login-page { min-height: 100vh; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-  .login-card { background: #fff; border-radius: 24px; padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: var(--shadow-lg); }
-  .login-logo { text-align: center; margin-bottom: 2rem; }
-  .login-logo .logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto .75rem; color: #fff; font-size: 1.6rem; }
-  .login-logo h2 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--brand); }
-  .login-logo p { font-size: .85rem; color: var(--gray-500); }
-  .tabs { display: flex; background: var(--gray-100); border-radius: 10px; padding: 4px; gap: 4px; margin-bottom: 1.75rem; }
-  .tab { flex: 1; padding: .55rem; border-radius: 8px; border: none; cursor: pointer; font-size: .82rem; font-weight: 700; font-family: 'Sora', sans-serif; background: transparent; color: var(--gray-500); transition: all .2s; }
-  .tab.active { background: #fff; color: var(--gray-900); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-
-  /* ── THERAPY ACTIVITIES ── */
-  .activity-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); overflow: hidden; transition: all .25s; cursor: pointer; }
-  .activity-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-  .activity-header { padding: 2.5rem 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-  .activity-header.blue { background: var(--brand-light); }
-  .activity-header.teal { background: var(--teal-light); }
-  .activity-header.amber { background: var(--amber-light); }
-  .activity-header.purple { background: var(--purple-light); }
-  .activity-header.coral { background: var(--coral-light); }
-  .activity-body { padding: 1.25rem; }
-  .activity-body h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: .35rem; }
-  .activity-body p { font-size: .82rem; color: var(--gray-500); margin-bottom: .85rem; }
-  .activity-footer { display: flex; align-items: center; justify-content: space-between; }
-
-  /* ── SEQUENCIA VISUAL GAME ── */
-  .seq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin: 1.5rem 0; }
-  .seq-item { background: #fff; border-radius: 12px; border: 2px solid var(--gray-200); padding: 1rem; text-align: center; cursor: grab; user-select: none; transition: all .2s; }
-  .seq-item.dragging { opacity: .5; border-color: var(--brand); }
-  .seq-item.correct { border-color: var(--green); background: var(--green-light); }
-  .seq-item.wrong { border-color: #ef4444; background: #fef2f2; }
-  .seq-emoji { font-size: 2rem; display: block; margin-bottom: .35rem; }
-
-  /* ── EMOTION GAME ── */
-  .emotion-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.5rem 0; }
-  .emotion-option { background: #fff; border-radius: 12px; border: 2px solid var(--gray-200); padding: 1.25rem; text-align: center; cursor: pointer; transition: all .2s; }
-  .emotion-option:hover { border-color: var(--brand); }
-  .emotion-option.selected.correct { border-color: var(--green); background: var(--green-light); }
-  .emotion-option.selected.wrong { border-color: #ef4444; background: #fef2f2; }
-  .emotion-emoji { font-size: 2.5rem; display: block; margin-bottom: .5rem; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-    .kanban { grid-template-columns: 1fr; }
-    .app-shell { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-  }
-
-  /* scroll */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--gray-100); }
-  ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 99px; }
-  
-  /* misc */
-  .divider { height: 1px; background: var(--gray-200); margin: 1.5rem 0; }
-  .chip { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .7rem; border-radius: 99px; font-size: .72rem; font-weight: 700; }
-  .chip.blue { background: var(--brand-light); color: var(--brand-dark); }
-  .chip.teal { background: var(--teal-light); color: var(--teal); }
-  .chip.purple { background: var(--purple-light); color: var(--purple); }
-  .chip.amber { background: var(--amber-light); color: var(--amber); }
-  .text-muted { color: var(--gray-500); font-size: .85rem; }
-  .fw-bold { font-weight: 700; }
-  .mt-1 { margin-top: .5rem; } .mt-2 { margin-top: 1rem; } .mt-3 { margin-top: 1.5rem; }
-  .mb-1 { margin-bottom: .5rem; } .mb-2 { margin-bottom: 1rem; }
-  .flex { display: flex; } .items-center { align-items: center; } .gap-1 { gap: .5rem; } .gap-2 { gap: 1rem; }
-  .justify-between { justify-content: space-between; }
-  .w-full { width: 100%; }
-</style>
 </head>
 <body class="font-sans antialiased text-gray-800">
     <!-- Navbar -->
@@ -348,45 +62,7 @@
                     </button>
                 </div>
             </div>
-<body>
-
-<!-- ═══ TOAST ═══ -->
-<div class="toast" id="toast">
-  <i class="fas fa-check-circle toast-icon"></i>
-  <span id="toast-msg">Operação realizada!</span>
-</div>
-
-<!-- ═══ LANDING PAGE ═══ -->
-<section class="section active" id="sec-landing">
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="#">
-        <div class="nav-logo-icon"><i class="fas fa-comment-dots"></i></div>
-        EcosFala
-      </a>
-      <div class="nav-links">
-        <a href="#como-funciona" onclick="scrollSection('como-funciona')">Como Funciona</a>
-        <a href="#" onclick="scrollSection('beneficios')">Benefícios</a>
-        <a href="#" onclick="scrollSection('depoimentos')">Depoimentos</a>
-        <a href="#" onclick="scrollSection('blockchain')">⬡ Blockchain</a>
-      </div>
-      <div class="nav-actions">
-        <button class="btn btn-ghost btn-sm" onclick="showLogin()">Login</button>
-        <button class="btn btn-primary btn-sm" onclick="showCad()">Cadastrar Família</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <h1>Dando voz ao<br>silêncio</h1>
-        <p>A EcosFala usa tecnologia de clonagem de voz para criar uma ponte de comunicação para crianças não verbais, utilizando vozes familiares em atividades terapêuticas.</p>
-        <div class="hero-btns">
-          <button class="btn btn-white" onclick="showCad()"><i class="fas fa-users"></i> Cadastrar Família</button>
-          <button class="btn btn-outline-white" onclick="showLogin('profissional')"><i class="fas fa-user-md"></i> Área do Psicólogo</button>
-</div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -413,13 +89,7 @@
                     <img src="/EcosFala/assets/400.PNG" alt="Criança interagindo com EcosFala" class="rounded-lg shadow-xl transform rotate-2 hover:rotate-0 transition duration-300">
                 </div>
             </div>
-      </div>
-      <div class="hero-visual">
-        <div style="text-align:center; margin-bottom:1.5rem;">
-          <div style="font-size:4rem; margin-bottom:.5rem;">🗣️</div>
-          <div style="color:#fff; font-weight:800; font-size:1.2rem;">Plataforma de Comunicação</div>
-          <div style="color:rgba(255,255,255,.8); font-size:.85rem;">para crianças no espectro autista</div>
-</div>
+        </div>
         <div class="custom-shape-divider-bottom">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
@@ -438,27 +108,6 @@
                     Um processo simples e eficaz para criar uma experiência de comunicação personalizada
                 </p>
             </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="hero-stat-num">2.4k+</div>
-            <div class="hero-stat-label">Crianças atendidas</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">98%</div>
-            <div class="hero-stat-label">Satisfação familiar</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">340+</div>
-            <div class="hero-stat-label">Psicólogos parceiros</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">LGPD</div>
-            <div class="hero-stat-label">Dados protegidos</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
             <div class="grid md:grid-cols-3 gap-10 mt-12">
                 <!-- Step 1 -->
@@ -494,35 +143,6 @@
                     </p>
                 </div>
             </div>
-  <!-- COMO FUNCIONA -->
-  <div id="como-funciona" style="padding: 5rem 1.5rem; background: #fff;">
-    <div class="features" style="margin:0 auto; max-width:1100px;">
-      <div class="section-title">Como a EcosFala Funciona</div>
-      <div class="section-sub">Processo simples para criar uma experiência de comunicação personalizada</div>
-      <div class="cards-grid">
-        <div class="card" style="border-top: 4px solid var(--brand);">
-          <div class="card-icon blue"><i class="fas fa-user-plus"></i></div>
-          <h3>1. Cadastro e Perfil</h3>
-          <p>Famílias criam uma conta e preenchem o perfil da criança com informações relevantes para personalização das atividades terapêuticas.</p>
-        </div>
-        <div class="card" style="border-top: 4px solid var(--teal);">
-          <div class="card-icon teal"><i class="fas fa-microphone"></i></div>
-          <h3>2. Coleta de Voz</h3>
-          <p>Um familiar grava amostras de sua voz, processadas por nossa IA para criar um modelo personalizado com alta fidelidade.</p>
-        </div>
-        <div class="card" style="border-top: 4px solid var(--purple);">
-          <div class="card-icon purple"><i class="fas fa-gamepad"></i></div>
-          <h3>3. Atividades Terapêuticas</h3>
-          <p>A criança acessa atividades onde escuta instruções narradas com a voz familiar, criando um ambiente seguro e acolhedor.</p>
-        </div>
-        <div class="card" style="border-top: 4px solid var(--amber);">
-          <div class="card-icon amber"><i class="fas fa-chart-line"></i></div>
-          <h3>4. Monitoramento</h3>
-          <p>Psicólogos acompanham o progresso em tempo real com analytics detalhados sobre engajamento e evolução da criança.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
             <div class="mt-16 text-center">
                 <a href="https://youtu.be/lddvls3R0po" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800">
@@ -532,36 +152,7 @@
                     </svg>
                 </a>
             </div>
-  <!-- BENEFICIOS -->
-  <div id="beneficios" style="padding: 5rem 1.5rem; background: var(--gray-50);">
-    <div style="max-width:1100px; margin:0 auto;">
-      <div class="section-title">Benefícios Comprovados</div>
-      <div class="section-sub">Resultados reais para famílias e profissionais</div>
-      <div class="cards-grid">
-        <div class="card"><div class="card-icon teal"><i class="fas fa-heart"></i></div><h3>Voz Familiar</h3><p>Crianças respondem melhor quando a comunicação usa vozes de quem elas conhecem e confiam.</p><span class="card-badge badge-teal">Reduz Ansiedade</span></div>
-        <div class="card"><div class="card-icon blue"><i class="fas fa-lock"></i></div><h3>100% LGPD</h3><p>Criptografia de ponta a ponta para todos os dados sensíveis de saúde e áudio.</p><span class="card-badge badge-blue">Dados Seguros</span></div>
-        <div class="card"><div class="card-icon purple"><i class="fas fa-brain"></i></div><h3>IA Avançada</h3><p>Reconhecimento de padrões emocionais e adaptação dinâmica das atividades ao perfil da criança.</p><span class="card-badge badge-purple">Personalizado</span></div>
-        <div class="card"><div class="card-icon amber"><i class="fas fa-mobile-alt"></i></div><h3>Multi-Plataforma</h3><p>Acesse em qualquer dispositivo — tablet, celular ou computador — de forma fluida e acessível.</p><span class="card-badge badge-amber">Acessível</span></div>
-        <div class="card"><div class="card-icon coral"><i class="fas fa-chart-bar"></i></div><h3>Analytics em Tempo Real</h3><p>Relatórios detalhados para psicólogos e responsáveis sobre progresso e engajamento.</p><span class="card-badge badge-coral">Relatórios</span></div>
-        <div class="card"><div class="card-icon green"><i class="fas fa-link"></i></div><h3>Registro Blockchain</h3><p>Registros clínicos imutáveis na rede Sepolia Testnet para garantia de integridade.</p><span class="card-badge badge-green">Imutável</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DEPOIMENTOS -->
-  <div id="depoimentos" style="padding: 5rem 1.5rem; background: #fff;">
-    <div style="max-width: 900px; margin: 0 auto;">
-      <div class="section-title">O que dizem as famílias</div>
-      <div class="section-sub">Histórias reais de transformação</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-        <div class="card" style="border-left: 4px solid var(--brand);">
-          <div style="font-size:1.5rem; margin-bottom:.75rem;">⭐⭐⭐⭐⭐</div>
-          <p style="font-size:.9rem; color:var(--gray-700); margin-bottom:1rem; font-style:italic;">"Meu filho de 7 anos começou a usar a plataforma há 3 meses e a evolução é incrível. Ele consegue agora expressar quando está com fome ou precisa ir ao banheiro!"</p>
-          <div style="display:flex; align-items:center; gap:.75rem;">
-            <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#f093fb,#f5576c);">AM</div>
-            <div><div style="font-weight:700;font-size:.85rem;">Ana Meireles</div><div style="font-size:.75rem;color:var(--gray-500);">Mãe de Miguel, 7 anos</div></div>
-          </div>
-</div>
+        </div>
     </section>
 
     <!-- Benefícios Section -->
@@ -575,17 +166,6 @@
                     Ajudando crianças não verbais a se conectarem com o mundo através de vozes familiares
                 </p>
             </div>
-        <div class="card" style="border-left: 4px solid var(--teal);">
-          <div style="font-size:1.5rem; margin-bottom:.75rem;">⭐⭐⭐⭐⭐</div>
-          <p style="font-size:.9rem; color:var(--gray-700); margin-bottom:1rem; font-style:italic;">"Como psicóloga, a ferramenta transformou minha prática. Os relatórios de engajamento emocional me ajudam a ajustar as sessões de forma muito mais precisa."</p>
-          <div style="display:flex; align-items:center; gap:.75rem;">
-            <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">DS</div>
-            <div><div style="font-weight:700;font-size:.85rem;">Dra. Sílvia Rocha</div><div style="font-size:.75rem;color:var(--gray-500);">Psicóloga Clínica — CRP 06/112233</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Benefit 1 -->
@@ -654,17 +234,7 @@
                     </p>
                 </div>
             </div>
-  <!-- BLOCKCHAIN SECTION -->
-  <div id="blockchain" style="padding: 5rem 1.5rem; background: var(--gray-900);">
-    <div style="max-width:800px; margin:0 auto;">
-      <div class="section-title" style="color:#fff;">⬡ Registro em Blockchain</div>
-      <div class="section-sub" style="color:var(--gray-300);">Garanta a integridade de relatórios clínicos e consentimentos de uso de voz na rede Sepolia Testnet</div>
-      <div class="chain-panel">
-        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;">
-          <span class="chain-dot"></span>
-          <span id="chain-status-text" style="font-weight:600;">Aguardando conexão com MetaMask</span>
-          <span id="chain-wallet" class="chain-mono" style="margin-left:auto;"></span>
-</div>
+        </div>
     </section>
 
     <!-- Depoimentos Section -->
@@ -678,27 +248,6 @@
                     Veja como a EcosFala está ajudando famílias em todo o Brasil
                 </p>
             </div>
-        <div class="form-group">
-          <label class="form-label" style="color:#94a3b8;">Dado clínico ou hash de consentimento a registrar</label>
-          <input type="text" id="chain-input" class="form-input" style="background:#1e293b;border-color:#334155;color:#e2e8f0;" placeholder="Ex: CONSENTIMENTO_VOZ_PACIENTE_2024_001">
-        </div>
-        <div style="display:flex;gap:.75rem;">
-          <button class="btn btn-ghost" style="border-color:#334155;color:#94a3b8;" id="chain-connect-btn" onclick="chainConnect()"><i class="fab fa-ethereum"></i> Conectar MetaMask</button>
-          <button class="btn" id="chain-register-btn" style="background:#1d4ed8;color:#fff;opacity:.5;cursor:not-allowed;" disabled onclick="chainRegister()"><i class="fas fa-link"></i> Registrar na Blockchain</button>
-        </div>
-        <div id="chain-result" class="mt-2" style="display:none;">
-          <div id="chain-loading" style="color:#94a3b8;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i> Aguardando confirmação na rede...</div>
-          <div id="chain-success" style="display:none;">
-            <div style="color:#4ade80;font-weight:700;margin-bottom:.5rem;"><i class="fas fa-check-circle"></i> Registrado com sucesso!</div>
-            <div class="chain-mono">Hash da transação:</div>
-            <div class="chain-hash" id="chain-tx-hash"></div>
-            <a id="chain-explorer" href="#" target="_blank" style="color:#38bdf8;font-size:.82rem;margin-top:.5rem;display:inline-block;">Ver no Etherscan →</a>
-          </div>
-          <div id="chain-error" style="display:none;color:#f87171;font-size:.85rem;"><i class="fas fa-exclamation-circle"></i> <span id="chain-error-msg"></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Testimonial 1 -->
@@ -743,20 +292,7 @@
                     </div>
                 </div>
             </div>
-  <!-- FOOTER -->
-  <footer style="background:#111827;color:#9ca3af;padding:3rem 1.5rem;">
-    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;">
-      <div>
-        <div style="font-family:'Nunito',sans-serif;font-weight:900;color:#fff;font-size:1.3rem;margin-bottom:.75rem;">EcosFala</div>
-        <p style="font-size:.85rem;line-height:1.7;">Dando voz ao silêncio. Tecnologia de clonagem de voz para crianças no espectro autista.</p>
-      </div>
-      <div>
-        <div style="font-weight:700;color:#fff;margin-bottom:.75rem;">Plataforma</div>
-        <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.85rem;">
-          <a href="#" onclick="showLogin()" style="color:#9ca3af;text-decoration:none;">Área do Psicólogo</a>
-          <a href="#" onclick="showCad()" style="color:#9ca3af;text-decoration:none;">Cadastrar Família</a>
-          <a href="#" style="color:#9ca3af;text-decoration:none;">API Docs</a>
-</div>
+        </div>
     </section>
 
     <!-- FAQ Section -->
@@ -770,53 +306,6 @@
                     Respostas para as dúvidas mais comuns sobre a EcosFala
                 </p>
             </div>
-      </div>
-      <div>
-        <div style="font-weight:700;color:#fff;margin-bottom:.75rem;">Empresa</div>
-        <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.85rem;">
-          <a href="#" style="color:#9ca3af;text-decoration:none;">Sobre nós</a>
-          <a href="#" style="color:#9ca3af;text-decoration:none;">Política de Privacidade</a>
-          <a href="#" style="color:#9ca3af;text-decoration:none;">Termos de Uso</a>
-        </div>
-      </div>
-    </div>
-    <div style="border-top:1px solid #1f2937;margin-top:2rem;padding-top:1.5rem;text-align:center;font-size:.8rem;">© 2025 EcosFala. Todos os direitos reservados. LGPD compliant.</div>
-  </footer>
-</section>
-
-<!-- ═══ LOGIN PAGE ═══ -->
-<section class="section" id="sec-login">
-  <div class="login-page">
-    <div class="login-card">
-      <div class="login-logo">
-        <div class="logo-icon"><i class="fas fa-comment-dots"></i></div>
-        <h2>EcosFala</h2>
-        <p>Acesse sua conta para continuar</p>
-      </div>
-      <div class="tabs">
-        <button class="tab active" id="tab-familia" onclick="setLoginTab('familia')">Família</button>
-        <button class="tab" id="tab-profissional" onclick="setLoginTab('profissional')">Psicólogo</button>
-        <button class="tab" id="tab-admin" onclick="setLoginTab('admin')">Admin</button>
-      </div>
-      <div class="form-group">
-        <label class="form-label">E-mail</label>
-        <input type="email" class="form-input" id="login-email" placeholder="seu@email.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Senha</label>
-        <input type="password" class="form-input" id="login-pass" placeholder="••••••••">
-      </div>
-      <button class="btn btn-primary w-full" style="justify-content:center; padding:.75rem;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-      <div style="text-align:center;margin-top:1.5rem;font-size:.85rem;color:var(--gray-500);">
-        Não tem conta? <a href="#" onclick="showCad()" style="color:var(--brand);font-weight:700;">Cadastrar família</a>
-      </div>
-      <div class="divider"></div>
-      <div style="text-align:center;">
-        <button class="btn btn-ghost btn-sm" onclick="show('sec-landing')"><i class="fas fa-arrow-left"></i> Voltar ao site</button>
-      </div>
-    </div>
-  </div>
-</section>
 
             <div class="space-y-8">
                 <!-- FAQ Item 1 -->
@@ -878,190 +367,8 @@
                         </p>
                     </div>
                 </div>
-<!-- ═══ CADASTRO ═══ -->
-<section class="section" id="sec-cad">
-  <div class="login-page" style="align-items:flex-start;padding-top:2rem;">
-    <div class="login-card" style="max-width:560px;">
-      <div class="login-logo">
-        <div class="logo-icon"><i class="fas fa-users"></i></div>
-        <h2>Cadastrar Família</h2>
-        <p>Crie uma conta para começar</p>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Nome completo do responsável</label><input class="form-input" placeholder="Maria Silva"></div>
-        <div class="form-group"><label class="form-label">CPF</label><input class="form-input" placeholder="000.000.000-00"></div>
-      </div>
-      <div class="form-group"><label class="form-label">E-mail</label><input class="form-input" type="email" placeholder="contato@email.com"></div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Senha</label><input class="form-input" type="password" placeholder="••••••••"></div>
-        <div class="form-group"><label class="form-label">Confirmar senha</label><input class="form-input" type="password" placeholder="••••••••"></div>
-      </div>
-      <div style="background:var(--brand-light);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;">
-        <div style="font-weight:700;color:var(--brand-dark);margin-bottom:.75rem;"><i class="fas fa-child"></i> Dados da Criança</div>
-        <div class="form-row">
-          <div class="form-group" style="margin-bottom:0"><label class="form-label">Nome da criança</label><input class="form-input" placeholder="João"></div>
-          <div class="form-group" style="margin-bottom:0"><label class="form-label">Data de nascimento</label><input class="form-input" type="date"></div>
+            </div>
         </div>
-        <div class="form-group mt-1"><label class="form-label">Diagnóstico</label>
-          <select class="form-select"><option>TEA Nível 1</option><option>TEA Nível 2</option><option>TEA Nível 3</option><option>Sem diagnóstico formal</option></select>
-        </div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1.25rem;font-size:.82rem;color:var(--gray-500);">
-        <input type="checkbox" id="lgpd-consent" style="margin-top:2px;flex-shrink:0;">
-        <label for="lgpd-consent">Li e concordo com os <a href="#" style="color:var(--brand);">Termos de Uso</a> e <a href="#" style="color:var(--brand);">Política de Privacidade</a>. Autorizo o processamento de dados de áudio e saúde conforme a LGPD.</label>
-      </div>
-      <button class="btn btn-primary w-full" style="justify-content:center;padding:.75rem;" onclick="doRegistro()"><i class="fas fa-user-plus"></i> Criar conta gratuita</button>
-      <div style="text-align:center;margin-top:1rem;">
-        <button class="btn btn-ghost btn-sm" onclick="showLogin()"><i class="fas fa-arrow-left"></i> Já tenho conta</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ APP FAMILIA ═══ -->
-<section class="section" id="sec-familia">
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="#"><div class="nav-logo-icon"><i class="fas fa-comment-dots"></i></div>EcosFala</a>
-      <div style="display:flex;align-items:center;gap:1rem;">
-        <span style="font-size:.85rem;font-weight:600;color:var(--gray-500);">Olá, Gabriel! 👋</span>
-        <div class="avatar avatar-sm">GA</div>
-        <button class="btn btn-ghost btn-sm" onclick="show('sec-landing')"><i class="fas fa-sign-out-alt"></i> Sair</button>
-      </div>
-    </div>
-  </nav>
-  <div style="max-width:1200px;margin:0 auto;padding:2rem 1.5rem;">
-    <!-- Hero banner -->
-    <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);border-radius:20px;padding:2rem;color:#fff;margin-bottom:2rem;">
-      <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.6rem;">Olá, Gabriel! 👋</h2>
-      <p style="margin:.5rem 0 1rem;opacity:.9;">Vamos praticar com algumas atividades divertidas hoje!</p>
-      <div style="display:flex;gap:.75rem;align-items:center;">
-        <div style="background:rgba(255,255,255,.2);border-radius:10px;padding:.5rem 1rem;display:inline-flex;align-items:center;gap:.5rem;font-weight:700;">🏆 Estrelas conquistadas: <span id="family-stars">8</span></div>
-        <div style="background:rgba(255,255,255,.2);border-radius:10px;padding:.5rem 1rem;display:inline-flex;align-items:center;gap:.5rem;font-weight:700;">🎯 Sequência: 5 dias</div>
-      </div>
-    </div>
-
-    <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;margin-bottom:1.25rem;">Suas Atividades</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-bottom:2.5rem;">
-      <div class="activity-card" onclick="openActivity('aac')">
-        <div class="activity-header blue"><i class="fas fa-images" style="font-size:3rem;color:var(--brand);"></i></div>
-        <div class="activity-body">
-          <h4>Comunicação por Imagens</h4>
-          <p>Aponte para imagens para expressar necessidades e desejos.</p>
-          <div class="activity-footer"><span class="chip blue">⭐ Básico</span><button class="btn btn-primary btn-sm">Jogar</button></div>
-        </div>
-      </div>
-      <div class="activity-card" onclick="openActivity('seq')">
-        <div class="activity-header teal"><i class="fas fa-sort-amount-down" style="font-size:3rem;color:var(--teal);"></i></div>
-        <div class="activity-body">
-          <h4>Sequência Visual</h4>
-          <p>Organize as imagens na ordem correta para criar uma rotina.</p>
-          <div class="activity-footer"><span class="chip" style="background:var(--purple-light);color:var(--purple);">⭐ Intermediário</span><button class="btn btn-purple btn-sm">Jogar</button></div>
-        </div>
-      </div>
-      <div class="activity-card" onclick="openActivity('emotion')">
-        <div class="activity-header amber"><span style="font-size:3rem;">😊</span></div>
-        <div class="activity-body">
-          <h4>Reconhecimento de Emoções</h4>
-          <p>Identifique e associe emoções a diferentes situações.</p>
-          <div class="activity-footer"><span class="chip amber">⭐ Avançado</span><button class="btn btn-amber btn-sm">Jogar</button></div>
-        </div>
-      </div>
-      <div class="activity-card" onclick="openActivity('sensorial')">
-        <div class="activity-header" style="background:var(--teal-light);"><span style="font-size:3rem;">🎧</span></div>
-        <div class="activity-body">
-          <h4>Estímulos Sensoriais</h4>
-          <p>Explore diferentes sons e texturas de forma controlada.</p>
-          <div class="activity-footer"><span class="chip teal">⭐ Básico</span><button class="btn btn-teal btn-sm">Jogar</button></div>
-        </div>
-      </div>
-      <div class="activity-card" onclick="openActivity('minha-voz')">
-        <div class="activity-header coral"><span style="font-size:3rem;">🎙️</span></div>
-        <div class="activity-body">
-          <h4>Minha Voz EcosFala</h4>
-          <p>Use sua voz clonada para expressar frases e necessidades.</p>
-          <div class="activity-footer"><span class="chip" style="background:var(--coral-light);color:var(--coral);">⭐ Personalizado</span><button class="btn btn-coral btn-sm">Jogar</button></div>
-        </div>
-      </div>
-      <div class="activity-card" onclick="openActivity('integracao')">
-        <div class="activity-header" style="background:var(--purple-light);"><span style="font-size:3rem;">🧩</span></div>
-        <div class="activity-body">
-          <h4>Integração Sensorial</h4>
-          <p>Atividades que estimulam a integração de diferentes sentidos.</p>
-          <div class="activity-footer"><span class="chip purple">⭐ Intermediário</span><button class="btn btn-purple btn-sm">Jogar</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motor de Voz familiar -->
-    <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:2rem;margin-bottom:2rem;">
-      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;">
-        <div class="card-icon coral" style="margin:0;"><i class="fas fa-microphone"></i></div>
-        <div><div style="font-weight:900;font-family:'Nunito',sans-serif;font-size:1.1rem;color:var(--coral);">Minha Voz EcosFala</div><div style="font-size:.82rem;color:var(--gray-500);">Toque nas frases para ouvir sua voz clonada</div></div>
-        <button style="margin-left:auto;" class="btn btn-sm" style="border-color:var(--coral);color:var(--coral);" onclick="closeModal()">✕</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem;" id="voice-phrases-family">
-        <!-- filled by JS -->
-      </div>
-      <div class="divider"></div>
-      <div style="font-weight:700;font-size:.88rem;margin-bottom:.75rem;">Criar nova frase:</div>
-      <div style="display:flex;gap:.75rem;">
-        <input class="form-input" id="new-phrase-input" placeholder="Digite uma frase..." style="flex:1;">
-        <button class="btn btn-coral btn-sm" onclick="addPhrase()"><i class="fas fa-plus"></i> Adicionar</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ APP PROFISSIONAL ═══ -->
-<section class="section" id="sec-profissional">
-  <nav style="border-bottom:2px solid var(--brand);">
-    <div class="nav-inner">
-      <a class="nav-logo" href="#"><div class="nav-logo-icon"><i class="fas fa-comment-dots"></i></div>EcosFala</a>
-      <div style="display:flex;align-items:center;gap:.75rem;">
-        <div style="font-size:.82rem;color:var(--gray-500);"><i class="fas fa-user-md"></i> Dra. Ana Sousa — Psicóloga</div>
-        <div class="avatar avatar-sm">AS</div>
-        <button class="btn btn-ghost btn-sm" onclick="show('sec-landing')"><i class="fas fa-sign-out-alt"></i> Sair</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="app-shell">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-user">
-        <div class="avatar">AS</div>
-        <div>
-          <div class="sidebar-name">Dra. Ana Sousa</div>
-          <div class="sidebar-role">Psicóloga</div>
-        </div>
-      </div>
-      <div class="sidebar-section">Principal</div>
-      <div class="sidebar-item active" id="sb-dashboard" onclick="setProTab('dashboard')"><i class="fas fa-th-large"></i>Dashboard</div>
-      <div class="sidebar-item" id="sb-clientes" onclick="setProTab('clientes')"><i class="fas fa-users"></i>Clientes</div>
-      <div class="sidebar-item" id="sb-agendamentos" onclick="setProTab('agendamentos')"><i class="fas fa-calendar-alt"></i>Agendamentos</div>
-      <div class="sidebar-item" id="sb-analytics" onclick="setProTab('analytics')"><i class="fas fa-chart-line"></i>Analytics</div>
-      <div class="sidebar-section">Ferramentas</div>
-      <div class="sidebar-item" id="sb-voz" onclick="setProTab('voz')"><i class="fas fa-microphone"></i>Motor de Voz</div>
-      <div class="sidebar-item" id="sb-campanhas" onclick="setProTab('campanhas')"><i class="fas fa-bullhorn"></i>Campanhas</div>
-      <div class="sidebar-item" id="sb-blockchain" onclick="setProTab('blockchain')"><i class="fas fa-link"></i>Blockchain</div>
-      <div class="sidebar-section">Sistema</div>
-      <div class="sidebar-item" id="sb-config" onclick="setProTab('config')"><i class="fas fa-cog"></i>Configurações</div>
-    </div>
-
-    <!-- Main -->
-    <div class="main-content" id="pro-main">
-      <!-- dashboard tab -->
-      <div id="pro-tab-dashboard">
-        <div class="page-header">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div><h2>Funil de Vendas e Gestão de Clientes</h2><p>Bem-vinda de volta, Dra. Ana!</p></div>
-            <div style="display:flex;gap:.75rem;">
-              <button class="btn btn-ghost btn-sm" onclick="showToast('Sincronizado!','success')"><i class="fas fa-sync"></i> Sincronizar</button>
-              <button class="btn btn-primary btn-sm" onclick="openNewClient()"><i class="fas fa-plus"></i> Novo Cliente</button>
-</div>
-          </div>
-</div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════
@@ -1127,53 +434,7 @@
                   <p class="text-gray-500 text-sm mt-1">Cada transação emite um evento contendo o endereço do remetente, o valor gravado e o timestamp do bloco — rastreável publicamente no Etherscan da Sepolia.</p>
                 </div>
               </div>
-        <!-- Stats -->
-        <div class="stats-row">
-          <div class="stat-card"><div class="label">Clientes Ativos</div><div class="value" style="color:var(--brand);">32</div><div class="delta">↑ +3 este mês</div></div>
-          <div class="stat-card"><div class="label">Sessões este mês</div><div class="value" style="color:var(--teal);">148</div><div class="delta">↑ +12%</div></div>
-          <div class="stat-card"><div class="label">Receita Mensal</div><div class="value" style="color:var(--green);">R$18.5k</div><div class="delta">↑ +8% vs. anterior</div></div>
-          <div class="stat-card"><div class="label">Taxa de Conversão</div><div class="value" style="color:var(--purple);">64%</div><div class="delta neg">↓ -2% vs. anterior</div></div>
-        </div>
-        <!-- Kanban -->
-        <div class="kanban" id="kanban-board">
-          <div class="kanban-col">
-            <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--brand);">Prospecção</span><span class="kanban-count">12</span></div>
-            <div class="kanban-card"><div class="kanban-card-name">Escola Viver Bem</div><div class="kanban-card-meta">Primeiro contato • Há 2 dias</div><div class="kanban-card-value">R$ 8.500</div></div>
-            <div class="kanban-card"><div class="kanban-card-name">Dr. Ricardo Ferreira</div><div class="kanban-card-meta">Indicação • Há 3 dias</div><div class="kanban-card-value">R$ 1.200</div></div>
-            <div class="kanban-card"><div class="kanban-card-name">Família Almeida</div><div class="kanban-card-meta">Site • Há 5 dias</div><div class="kanban-card-value">R$ 3.400</div></div>
-          </div>
-          <div class="kanban-col">
-            <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--purple);">Apresentação</span><span class="kanban-count">8</span></div>
-            <div class="kanban-card"><div class="kanban-card-name">Colégio Futuro</div><div class="kanban-card-meta">Agendado • 09/03/2025</div><div class="kanban-card-value">R$ 15.000</div></div>
-            <div class="kanban-card"><div class="kanban-card-name">Família Costa</div><div class="kanban-card-meta">Remarcado • 11/03/2025</div><div class="kanban-card-value">R$ 3.200</div></div>
-          </div>
-          <div class="kanban-col">
-            <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--amber);">Proposta</span><span class="kanban-count">5</span></div>
-            <div class="kanban-card"><div class="kanban-card-name">Instituto Bem Estar</div><div class="kanban-card-meta">Enviada • Há 1 dia</div><div class="kanban-card-value">R$ 22.000</div></div>
-            <div class="kanban-card"><div class="kanban-card-name">Família Rodrigues</div><div class="kanban-card-meta">Em análise • Há 3 dias</div><div class="kanban-card-value">R$ 4.800</div></div>
-          </div>
-          <div class="kanban-col">
-            <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--green);">Fechados</span><span class="kanban-count">7</span></div>
-            <div class="kanban-card" style="border:1px solid var(--green-light);"><div class="kanban-card-name">Centro Educacional Luz</div><div class="kanban-card-meta">Contrato assinado • Hoje</div><div class="kanban-card-value">R$ 18.500</div></div>
-            <div class="kanban-card" style="border:1px solid var(--green-light);"><div class="kanban-card-name">Família Pereira</div><div class="kanban-card-meta">Pagamento inicial • Ontem</div><div class="kanban-card-value">R$ 3.600</div></div>
-          </div>
-        </div>
-        <!-- Quick Actions -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;">
-          <div>
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Tarefas Pendentes</div>
-            <div id="tasks-list">
-              <!-- filled by JS -->
-</div>
-          </div>
-          <div>
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Ações Rápidas</div>
-            <button class="btn btn-primary w-full" style="justify-content:center;margin-bottom:.75rem;" onclick="openNewClient()"><i class="fas fa-user-plus"></i> Novo Cliente</button>
-            <button class="btn btn-teal w-full" style="justify-content:center;margin-bottom:.75rem;" onclick="setProTab('agendamentos')"><i class="fas fa-calendar-plus"></i> Agendar Reunião</button>
-            <button class="btn btn-purple w-full" style="justify-content:center;" onclick="setProTab('analytics')"><i class="fas fa-file-alt"></i> Gerar Relatório</button>
-          </div>
-        </div>
-      </div>
+            </div>
 
             <!-- Badges técnicos -->
             <div class="flex flex-wrap gap-2 mt-8">
@@ -1183,44 +444,10 @@
               <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">Sepolia Testnet</span>
               <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">Remix IDE</span>
             </div>
-      <!-- clientes tab -->
-      <div id="pro-tab-clientes" style="display:none;">
-        <div class="page-header">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div><h2>Clientes</h2><p>Gerencie todos os seus clientes e pacientes</p></div>
-            <button class="btn btn-primary btn-sm" onclick="openNewClient()"><i class="fas fa-plus"></i> Novo Cliente</button>
           </div>
-        </div>
-        <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);overflow:hidden;">
-          <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--gray-200);display:flex;gap:.75rem;">
-            <input class="form-input" placeholder="🔍 Buscar clientes..." style="max-width:300px;">
-            <select class="form-select" style="width:auto;"><option>Todos os status</option><option>Ativo</option><option>Inativo</option><option>Proposta</option></select>
-</div>
-          <table style="width:100%;border-collapse:collapse;">
-            <thead><tr style="background:var(--gray-50);">
-              <th style="padding:.85rem 1.5rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Nome</th>
-              <th style="padding:.85rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Criança</th>
-              <th style="padding:.85rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Status</th>
-              <th style="padding:.85rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Última sessão</th>
-              <th style="padding:.85rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Plano</th>
-              <th style="padding:.85rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Ações</th>
-            </tr></thead>
-            <tbody id="clientes-table-body">
-            </tbody>
-          </table>
-        </div>
-      </div>
 
           <!-- Coluna direita: painel interativo -->
-      <!-- agendamentos tab -->
-      <div id="pro-tab-agendamentos" style="display:none;">
-        <div class="page-header"><h2>Agendamentos</h2><p>Gerencie consultas e sessões terapêuticas</p></div>
-        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;">
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Esta semana — Maio 2025</div>
-            <div id="agenda-list"></div>
-          </div>
-<div>
+          <div>
             <div class="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
 
               <!-- Barra superior estilo terminal -->
@@ -1313,17 +540,7 @@
                   Função: <code>registrarDado(string _valor)</code>
                 </p>
               </div>
-            <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;margin-bottom:1rem;">
-              <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Novo Agendamento</div>
-              <div class="form-group"><label class="form-label">Cliente</label><select class="form-select"><option>Família Almeida</option><option>Família Costa</option><option>Instituto Bem Estar</option></select></div>
-              <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-input"></div>
-              <div class="form-group"><label class="form-label">Horário</label><input type="time" class="form-input" value="09:00"></div>
-              <div class="form-group"><label class="form-label">Tipo</label><select class="form-select"><option>Consulta individual</option><option>Sessão terapêutica</option><option>Reunião familiar</option><option>Avaliação</option></select></div>
-              <button class="btn btn-primary w-full" style="justify-content:center;" onclick="showToast('Agendamento criado!','success')"><i class="fas fa-calendar-plus"></i> Agendar</button>
-</div>
-          </div>
-        </div>
-      </div>
+            </div>
 
             <!-- Prova de conceito: info adicional -->
             <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
@@ -1331,39 +548,9 @@
                 <strong>Conclusão técnica:</strong> A transação é validada pelos nós da rede Sepolia, incluída em um bloco confirmado e permanentemente registrada na cadeia. Um hash único é gerado e consultável publicamente no explorador de blocos, comprovando integridade e imutabilidade do dado gravado.
               </p>
             </div>
-      <!-- analytics tab -->
-      <div id="pro-tab-analytics" style="display:none;">
-        <div class="page-header"><h2>Analytics & Relatórios</h2><p>Acompanhe a evolução dos seus pacientes</p></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
-          <!-- Uso semanal -->
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.5rem;">Frequência de uso semanal</div>
-            <div class="chart-bar-wrap" id="bar-chart"></div>
-            <div style="display:flex;justify-content:space-between;margin-top:.5rem;" id="bar-labels"></div>
-          </div>
-          <!-- Top palavras -->
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.25rem;">Palavras mais comunicadas</div>
-            <div id="word-progress"></div>
-          </div>
-          <!-- Engajamento emocional -->
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Padrões Emocionais</div>
-            <div style="display:flex;flex-wrap:wrap;" id="emotion-chips"></div>
-            <div class="divider"></div>
-            <div style="font-size:.82rem;color:var(--gray-500);">Análise das últimas 4 semanas. Padrão: <strong>Engajamento crescente</strong> com menor frequência de sobrecarga sensorial.</div>
-</div>
-          <!-- Progresso geral -->
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.25rem;">Progresso por Área</div>
-            <div id="area-progress"></div>
           </div>
         </div>
-        <div style="margin-top:1.5rem;text-align:right;">
-          <button class="btn btn-ghost btn-sm" onclick="showToast('Relatório PDF gerado!','success')"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
-          <button class="btn btn-primary btn-sm" onclick="setProTab('blockchain')"><i class="fas fa-link"></i> Registrar na Blockchain</button>
-</div>
-</div>
+      </div>
     </section>
 
     <!-- CTA Section -->
@@ -1382,20 +569,7 @@
                 <a href="#contato" class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-blue-700 transition duration-300">
                     Fale Conosco
                 </a>
-
-      <!-- motor de voz tab -->
-      <div id="pro-tab-voz" style="display:none;">
-        <div class="page-header"><h2>Motor de Voz (IA)</h2><p>Gerencie clonagem e síntese de voz personalizada</p></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
-          <!-- Upload de amostras -->
-          <div class="voice-panel">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;font-size:1.1rem;margin-bottom:.5rem;">1. Gravar amostras de voz</div>
-            <p style="font-size:.85rem;color:var(--gray-500);margin-bottom:1.25rem;">Grave ao menos 3 minutos de voz do familiar para clonagem de alta fidelidade.</p>
-            <button class="record-btn idle" id="record-btn" onclick="toggleRecord()"><i class="fas fa-microphone" id="record-icon"></i></button>
-            <div style="text-align:center;font-size:.82rem;color:var(--gray-500);margin-bottom:.5rem;" id="record-label">Pressione para gravar</div>
-            <div class="waveform" id="waveform">
-              <div style="font-size:.8rem;color:var(--gray-300);">Aguardando gravação...</div>
-</div>
+            </div>
         </div>
     </section>
 
@@ -1440,20 +614,7 @@
                         </button>
                     </div>
                 </form>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:1.25rem;">
-              <div style="background:var(--gray-50);border-radius:8px;padding:.75rem;text-align:center;">
-                <div style="font-size:1.1rem;font-weight:700;color:var(--brand);" id="rec-time">0:00</div>
-                <div style="font-size:.7rem;color:var(--gray-500);">Gravação atual</div>
-              </div>
-              <div style="background:var(--gray-50);border-radius:8px;padding:.75rem;text-align:center;">
-                <div style="font-size:1.1rem;font-weight:700;color:var(--teal);" id="rec-count">0</div>
-                <div style="font-size:.7rem;color:var(--gray-500);">Amostras</div>
-              </div>
-              <div style="background:var(--gray-50);border-radius:8px;padding:.75rem;text-align:center;">
-                <div style="font-size:1.1rem;font-weight:700;color:var(--amber);" id="rec-duration">0:00</div>
-                <div style="font-size:.7rem;color:var(--gray-500);">Total gravado</div>
-              </div>
-</div>
+            </div>
             <div class="bg-gray-50 p-8 rounded-lg">
                 <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
                 <div class="space-y-4">
@@ -1467,44 +628,10 @@
                         </div>
                     </div>
                 </div>
-            <button class="btn btn-primary w-full" style="justify-content:center;" id="train-btn" onclick="trainVoice()" disabled><i class="fas fa-robot"></i> Treinar modelo de voz</button>
-          </div>
-          <!-- Painel de Emoções / Síntese -->
-          <div class="voice-panel">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;font-size:1.1rem;margin-bottom:.5rem;">2. Painel de Emoções e Síntese</div>
-            <p style="font-size:.85rem;color:var(--gray-500);margin-bottom:1.25rem;">Ajuste o tom da voz clonada para diferentes contextos terapêuticos.</p>
-            <div class="form-group">
-              <label class="form-label">Texto para sintetizar</label>
-              <textarea class="form-input" id="tts-text" rows="3" placeholder="Digite o texto que será convertido para a voz clonada...">Olá! Vamos brincar juntos hoje?</textarea>
-</div>
-            <div class="form-group">
-              <label class="form-label">Tom emocional</label>
-              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-                <button class="aac-category-btn active" onclick="setTone(this,'calmo')">😌 Calmo</button>
-                <button class="aac-category-btn" onclick="setTone(this,'alegre')">😄 Alegre</button>
-                <button class="aac-category-btn" onclick="setTone(this,'instrutivo')">📖 Instrutivo</button>
-                <button class="aac-category-btn" onclick="setTone(this,'encorajador')">💪 Encorajador</button>
-              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Velocidade: <span id="speed-val">1.0</span>x</label>
-              <input type="range" min="0.5" max="2" step="0.1" value="1.0" style="width:100%;" oninput="document.getElementById('speed-val').textContent=parseFloat(this.value).toFixed(1)">
-            </div>
-            <button class="btn btn-coral w-full" style="justify-content:center;" onclick="synthesizeSpeech()"><i class="fas fa-play"></i> Sintetizar e Reproduzir</button>
-            <div id="synth-result" style="display:none;margin-top:1rem;background:var(--teal-light);border-radius:10px;padding:1rem;">
-              <div style="color:var(--teal);font-weight:700;margin-bottom:.5rem;"><i class="fas fa-check-circle"></i> Áudio gerado com sucesso!</div>
-              <div style="font-size:.82rem;color:var(--gray-700);">Tom: <strong id="synth-tone-label">Calmo</strong> • Duração estimada: ~3.2s</div>
-            </div>
-          </div>
-</div>
+        </div>
     </div>
 </section>
-        <!-- Gerenciar frases -->
-        <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;margin-top:1.5rem;">
-          <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Frases salvas — Voz de: Maria (mãe)</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;" id="pro-voice-phrases"></div>
-        </div>
-      </div>
 
 <!-- Footer -->
 <footer class="bg-gray-800 text-white py-12">
@@ -1518,26 +645,7 @@
                     <span class="ml-2 text-xl font-bold text-white">EcosFala</span>
                 </div>
                 <p class="text-gray-400">Dando voz ao silêncio através da tecnologia de clonagem de voz para crianças não verbais.</p>
-      <!-- Blockchain tab (profissional) -->
-      <div id="pro-tab-blockchain" style="display:none;">
-        <div class="page-header"><h2>Registro em Blockchain</h2><p>Garanta a integridade de relatórios clínicos na rede Sepolia Testnet</p></div>
-        <div style="max-width:700px;">
-          <div class="chain-panel">
-            <h3>⬡ Registrar Dado Clínico</h3>
-            <p style="color:#94a3b8;font-size:.85rem;margin-bottom:1.25rem;">Registre hashes de relatórios ou consentimentos de forma imutável na blockchain Ethereum (Sepolia Testnet)</p>
-            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;background:rgba(255,255,255,.05);border-radius:10px;padding:.75rem 1rem;">
-              <span class="chain-dot"></span>
-              <span id="chain-status-text2" style="font-weight:600;">Aguardando conexão com MetaMask</span>
-              <span id="chain-wallet2" class="chain-mono" style="margin-left:auto;"></span>
             </div>
-            <div class="form-group">
-              <label class="form-label" style="color:#94a3b8;">Selecionar relatório para registrar</label>
-              <select class="form-select" id="chain-select" style="background:#1e293b;border-color:#334155;color:#e2e8f0;">
-                <option>Relatório Mensal — Gabriel — Mai/2025</option>
-                <option>Consentimento Clonagem de Voz — Maria Silva</option>
-                <option>Avaliação Cognitiva — Gabriel — Abr/2025</option>
-              </select>
-</div>
             <div>
                 <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
                 <ul class="space-y-2">
@@ -1546,255 +654,29 @@
                     <li><a href="index3.html#beneficios" class="text-gray-400 hover:text-white transition duration-300">Benefícios</a></li>
                     <li><a href="index3.html#depoimentos" class="text-gray-400 hover:text-white transition duration-300">Depoimentos</a></li>
                 </ul>
-            <div class="form-group">
-              <label class="form-label" style="color:#94a3b8;">Hash do documento (SHA-256)</label>
-              <input type="text" id="chain-input2" class="form-input" style="background:#1e293b;border-color:#334155;color:#e2e8f0;font-family:monospace;" value="a3f8c2d91e4b567890abcdef1234567890abcdef">
-</div>
+            </div>
             <div>
                 <h3 class="text-lg font-semibold mb-4">Suporte</h3>
                 <ul class="space-y-2">
                     <li><a href="index3.html#faq" class="text-gray-400 hover:text-white transition duration-300">Perguntas Frequentes</a></li>
                     <li><a href="index3.html#contato" class="text-gray-400 hover:text-white transition duration-300">Contato</a></li>
                 </ul>
-            <div style="display:flex;gap:.75rem;">
-              <button class="btn btn-ghost btn-sm" style="border-color:#334155;color:#94a3b8;" onclick="chainConnect2()"><i class="fab fa-ethereum"></i> Conectar MetaMask</button>
-              <button class="btn btn-sm" id="chain-register-btn2" style="background:#1d4ed8;color:#fff;opacity:.5;cursor:not-allowed;" disabled onclick="chainRegister2()"><i class="fas fa-link"></i> Registrar na Blockchain</button>
-</div>
-            <div id="chain-result2" style="display:none;margin-top:1rem;">
-              <div id="chain-loading2" style="color:#94a3b8;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i> Aguardando confirmação na rede Sepolia...</div>
-              <div id="chain-success2" style="display:none;">
-                <div style="color:#4ade80;font-weight:700;margin-bottom:.5rem;"><i class="fas fa-check-circle"></i> Registrado na blockchain!</div>
-                <div class="chain-hash" id="chain-tx-hash2"></div>
-                <a id="chain-explorer2" href="#" target="_blank" style="color:#38bdf8;font-size:.82rem;margin-top:.5rem;display:inline-block;">Ver no Etherscan →</a>
-              </div>
-              <div id="chain-error2" style="display:none;color:#f87171;font-size:.85rem;"><span id="chain-error-msg2"></span></div>
             </div>
-          </div>
-          <!-- Histórico de registros -->
-          <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;margin-top:1.5rem;">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Histórico de Registros</div>
-            <table style="width:100%;border-collapse:collapse;font-size:.82rem;">
-              <thead><tr style="border-bottom:1px solid var(--gray-200);">
-                <th style="padding:.5rem 0;text-align:left;color:var(--gray-500);">Documento</th>
-                <th style="padding:.5rem;text-align:left;color:var(--gray-500);">Data</th>
-                <th style="padding:.5rem;text-align:left;color:var(--gray-500);">Status</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:.75rem 0;">Consentimento Voz — Família Pereira</td><td style="padding:.75rem .5rem;color:var(--gray-500);">08/05/2025</td><td style="padding:.75rem .5rem;"><span class="chip teal"><i class="fas fa-check"></i> Confirmado</span></td></tr>
-                <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:.75rem 0;">Relatório Abr/2025 — Gabriel</td><td style="padding:.75rem .5rem;color:var(--gray-500);">30/04/2025</td><td style="padding:.75rem .5rem;"><span class="chip teal"><i class="fas fa-check"></i> Confirmado</span></td></tr>
-                <tr><td style="padding:.75rem 0;">Avaliação Inicial — Miguel Costa</td><td style="padding:.75rem .5rem;color:var(--gray-500);">15/04/2025</td><td style="padding:.75rem .5rem;"><span class="chip teal"><i class="fas fa-check"></i> Confirmado</span></td></tr>
-              </tbody>
-            </table>
-          </div>
         </div>
-      </div>
-
-      <!-- campanhas tab -->
-      <div id="pro-tab-campanhas" style="display:none;">
-        <div class="page-header"><h2>Campanhas</h2><p>Crie e gerencie campanhas de comunicação com famílias</p></div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-          <div class="card"><div class="card-icon blue"><i class="fas fa-envelope"></i></div><h3>E-mail Marketing</h3><p>Envie newsletters e atualizações personalizadas para as famílias dos seus pacientes.</p><button class="btn btn-primary btn-sm mt-2" onclick="showToast('Em breve!','success')">Criar campanha</button></div>
-          <div class="card"><div class="card-icon teal"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp</h3><p>Integração com WhatsApp Business para lembretes automáticos de sessão.</p><button class="btn btn-teal btn-sm mt-2" onclick="showToast('Em breve!','success')">Configurar</button></div>
-          <div class="card"><div class="card-icon amber"><i class="fas fa-sms"></i></div><h3>SMS</h3><p>Envio de lembretes por SMS com confirmação de presença automatizada.</p><button class="btn btn-amber btn-sm mt-2" onclick="showToast('Em breve!','success')">Ativar</button></div>
-</div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2025 EcosFala. Todos os direitos reservados.</p>
-      </div>
-
-      <!-- config tab -->
-      <div id="pro-tab-config" style="display:none;">
-        <div class="page-header"><h2>Configurações</h2><p>Gerencie sua conta e preferências</p></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;">
-          <div class="voice-panel">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.25rem;">Dados do Profissional</div>
-            <div class="form-group"><label class="form-label">Nome</label><input class="form-input" value="Dra. Ana Sousa"></div>
-            <div class="form-group"><label class="form-label">CRP</label><input class="form-input" value="06/112233"></div>
-            <div class="form-group"><label class="form-label">E-mail</label><input class="form-input" type="email" value="ana.sousa@email.com"></div>
-            <div class="form-group"><label class="form-label">Especialidade</label><select class="form-select"><option selected>Psicologia Infantil</option><option>Neuropsicologia</option><option>ABA Terapia</option></select></div>
-            <button class="btn btn-primary btn-sm" onclick="showToast('Dados salvos!','success')">Salvar alterações</button>
-          </div>
-          <div class="voice-panel">
-            <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.25rem;">Notificações</div>
-            <div style="display:flex;flex-direction:column;gap:1rem;">
-              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
-                <span style="font-size:.88rem;font-weight:600;">Lembrete de sessões</span>
-                <input type="checkbox" checked style="width:18px;height:18px;accent-color:var(--brand);">
-              </label>
-              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
-                <span style="font-size:.88rem;font-weight:600;">Novos clientes</span>
-                <input type="checkbox" checked style="width:18px;height:18px;accent-color:var(--brand);">
-              </label>
-              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
-                <span style="font-size:.88rem;font-weight:600;">Relatórios semanais</span>
-                <input type="checkbox" style="width:18px;height:18px;accent-color:var(--brand);">
-              </label>
-              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
-                <span style="font-size:.88rem;font-weight:600;">Alertas de evolução</span>
-                <input type="checkbox" checked style="width:18px;height:18px;accent-color:var(--brand);">
-              </label>
-            </div>
-          </div>
-</div>
-      </div>
-    </div><!-- /main-content -->
-  </div><!-- /app-shell -->
-</section>
-
-<!-- ═══ MODALS ═══ -->
-
-<!-- New Client Modal -->
-<div class="modal-backdrop" id="modal-new-client" style="display:none;" onclick="closeModalById('modal-new-client')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-new-client')">✕</button>
-    <h3>➕ Novo Cliente</h3>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Empresa/Nome</label><input class="form-input" placeholder="Família Silva"></div>
-      <div class="form-group"><label class="form-label">Nome do contato</label><input class="form-input" placeholder="Maria Silva"></div>
+        </div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Cargo/Função</label><input class="form-input" placeholder="Responsável"></div>
-      <div class="form-group"><label class="form-label">E-mail</label><input class="form-input" type="email" placeholder="maria@email.com"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Telefone</label><input class="form-input" placeholder="(84) 99999-9999"></div>
-      <div class="form-group"><label class="form-label">Data do contato</label><input class="form-input" type="date"></div>
-</div>
 </footer>
-    <div class="form-group"><label class="form-label">Estágio</label>
-      <select class="form-select"><option>Prospecção</option><option>Apresentação</option><option>Proposta</option><option>Fechado</option></select>
-    </div>
-    <div style="display:flex;gap:.75rem;justify-content:flex-end;margin-top:1rem;">
-      <button class="btn btn-ghost" onclick="closeModalById('modal-new-client')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveNewClient()"><i class="fas fa-save"></i> Salvar cliente</button>
-    </div>
-  </div>
-</div>
 
 <!-- ═══════ ethers.js v6 CDN ═══════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-<!-- Activity: AAC -->
-<div class="modal-backdrop" id="modal-aac" style="display:none;" onclick="closeModalById('modal-aac')">
-  <div class="modal" style="max-width:720px;" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-aac')">✕</button>
-    <h3>🖼️ Comunicação por Imagens (AAC)</h3>
-    <div class="aac-output" id="aac-output">
-      <span class="aac-output-text" id="aac-output-text" style="color:var(--gray-300);">Toque nos cartões para comunicar...</span>
-      <div class="speaking-indicator" id="aac-speaking" style="display:none;">
-        <div class="speaking-bar"></div><div class="speaking-bar"></div><div class="speaking-bar"></div>
-      </div>
-      <button class="btn btn-ghost btn-sm" onclick="clearAACOutput()" style="flex-shrink:0;">✕ Limpar</button>
-    </div>
-    <div class="aac-toolbar">
-      <span style="font-size:.82rem;font-weight:700;color:var(--gray-500);">Categoria:</span>
-      <button class="aac-category-btn active" onclick="setAACCategory(this,'all')">Todos</button>
-      <button class="aac-category-btn" onclick="setAACCategory(this,'necessidades')">Necessidades</button>
-      <button class="aac-category-btn" onclick="setAACCategory(this,'sentimentos')">Sentimentos</button>
-      <button class="aac-category-btn" onclick="setAACCategory(this,'atividades')">Atividades</button>
-      <button class="aac-category-btn" onclick="setAACCategory(this,'comida')">Comida</button>
-    </div>
-    <div class="aac-grid" id="aac-grid"></div>
-    <div style="text-align:center;margin-top:1rem;">
-      <button class="btn btn-primary btn-sm" onclick="addCustomCard()"><i class="fas fa-plus"></i> Adicionar cartão</button>
-    </div>
-  </div>
-</div>
-
-<!-- Activity: Sequência Visual -->
-<div class="modal-backdrop" id="modal-seq" style="display:none;" onclick="closeModalById('modal-seq')">
-  <div class="modal" style="max-width:680px;" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-seq')">✕</button>
-    <h3>📋 Sequência Visual — Rotina matinal</h3>
-    <p style="color:var(--gray-500);font-size:.88rem;margin-bottom:1rem;">Arraste as imagens para ordenar a rotina correta!</p>
-    <div style="display:flex;gap:1rem;align-items:center;margin-bottom:1rem;">
-      <div style="background:var(--amber-light);color:var(--amber);padding:.5rem 1rem;border-radius:10px;font-size:.82rem;font-weight:700;">⭐ Pontos: <span id="seq-score">0</span></div>
-      <div style="background:var(--brand-light);color:var(--brand);padding:.5rem 1rem;border-radius:10px;font-size:.82rem;font-weight:700;">🎯 Tentativas: <span id="seq-tries">0</span></div>
-    </div>
-    <div class="seq-grid" id="seq-grid"></div>
-    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:1rem;">
-      <button class="btn btn-primary" onclick="checkSeq()"><i class="fas fa-check"></i> Verificar ordem</button>
-      <button class="btn btn-ghost" onclick="shuffleSeq()"><i class="fas fa-random"></i> Embaralhar</button>
-    </div>
-    <div id="seq-feedback" style="margin-top:1rem;padding:1rem;border-radius:10px;display:none;text-align:center;font-weight:700;"></div>
-  </div>
-</div>
-
-<!-- Activity: Emoções -->
-<div class="modal-backdrop" id="modal-emotion" style="display:none;" onclick="closeModalById('modal-emotion')">
-  <div class="modal" style="max-width:600px;" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-emotion')">✕</button>
-    <h3>😊 Reconhecimento de Emoções</h3>
-    <div style="text-align:center;margin-bottom:1.25rem;">
-      <div style="font-size:.95rem;color:var(--gray-700);font-weight:600;margin-bottom:.5rem;">Como você está sentindo agora?</div>
-      <div id="emotion-scenario" style="font-size:1.3rem;background:var(--gray-50);border-radius:12px;padding:1.5rem;margin-bottom:.75rem;"></div>
-      <div style="background:var(--amber-light);color:var(--amber);padding:.5rem 1rem;border-radius:10px;font-size:.82rem;font-weight:700;display:inline-block;">⭐ <span id="emotion-score">0</span> pontos</div>
-    </div>
-    <div class="emotion-options" id="emotion-grid"></div>
-    <div id="emotion-feedback" style="display:none;margin-top:.75rem;padding:1rem;border-radius:10px;text-align:center;font-weight:700;"></div>
-    <button class="btn btn-primary w-full mt-2" style="justify-content:center;" onclick="nextEmotion()"><i class="fas fa-arrow-right"></i> Próxima situação</button>
-  </div>
-</div>
-
-<!-- Activity: Sensorial -->
-<div class="modal-backdrop" id="modal-sensorial" style="display:none;" onclick="closeModalById('modal-sensorial')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-sensorial')">✕</button>
-    <h3>🎧 Estímulos Sensoriais</h3>
-    <p style="color:var(--gray-500);font-size:.88rem;margin-bottom:1.25rem;">Explore sons de forma controlada e registre como se sente.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;" id="sensorial-grid"></div>
-    <div class="divider"></div>
-    <div style="font-weight:700;margin-bottom:.75rem;">Como você está se sentindo?</div>
-    <div style="display:flex;gap:.75rem;flex-wrap:wrap;" id="sensorial-feelings"></div>
-  </div>
-</div>
-
-<!-- Activity: Minha Voz (modal from family) -->
-<div class="modal-backdrop" id="modal-minha-voz" style="display:none;" onclick="closeModalById('modal-minha-voz')">
-  <div class="modal" style="max-width:600px;" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-minha-voz')">✕</button>
-    <h3 style="color:var(--coral);">🎙️ Minha Voz EcosFala</h3>
-    <p style="color:var(--gray-500);font-size:.88rem;margin-bottom:1.25rem;">Toque nas frases para ouvir sua voz clonada:</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem;" id="voice-phrases-modal"></div>
-    <div class="divider"></div>
-    <div style="font-weight:700;font-size:.88rem;margin-bottom:.75rem;">Criar nova frase:</div>
-    <div style="display:flex;gap:.75rem;">
-      <input class="form-input" id="modal-phrase-input" placeholder="Digite uma frase...">
-      <button class="btn btn-coral btn-sm" onclick="addPhraseModal()"><i class="fas fa-plus"></i></button>
-    </div>
-  </div>
-</div>
 
 <script>
 /* ─── Configuração do contrato ────────────────────────────────────────────
    O ABI abaixo corresponde ao contrato com a função registrarDado(string).
 ──────────────────────────────────────────────────────────────────────── */
 const CONTRACT_ADDRESS = "0x9474DEb6fc71Eed33553Dffe00261E43b7F99f69"; 
-// ════ STATE ════
-const state = {
-  currentSection: 'sec-landing',
-  loginRole: 'familia',
-  proTab: 'dashboard',
-  recording: false,
-  recInterval: null,
-  recSeconds: 0,
-  recCount: 0,
-  recTotalSeconds: 0,
-  aacCategory: 'all',
-  aacOutput: [],
-  seqItems: [],
-  emotionScore: 0,
-  emotionIdx: 0,
-  voicePhrases: [
-    'Eu quero água, por favor',
-    'Eu estou com fome',
-    'Preciso ir ao banheiro',
-    'Quero brincar',
-    'Estou cansado',
-    'Eu preciso de ajuda',
-  ],
-  synthTone: 'calmo',
-  speaking: false,
-  familyStars: 8,
-};
 
 const CONTRACT_ABI = [
   {
@@ -1814,55 +696,9 @@ const CONTRACT_ABI = [
     "name": "DadoRegistrado",
     "type": "event"
   }
-const aacCards = [
-  { emoji:'💧', label:'Água', cat:'necessidades', phrase:'Eu quero água' },
-  { emoji:'🍎', label:'Comida', cat:'comida', phrase:'Eu estou com fome' },
-  { emoji:'🚽', label:'Banheiro', cat:'necessidades', phrase:'Preciso ir ao banheiro' },
-  { emoji:'😴', label:'Dormir', cat:'necessidades', phrase:'Quero dormir' },
-  { emoji:'😊', label:'Feliz', cat:'sentimentos', phrase:'Estou feliz' },
-  { emoji:'😢', label:'Triste', cat:'sentimentos', phrase:'Estou triste' },
-  { emoji:'😠', label:'Com raiva', cat:'sentimentos', phrase:'Estou com raiva' },
-  { emoji:'😰', label:'Ansioso', cat:'sentimentos', phrase:'Estou ansioso' },
-  { emoji:'🎮', label:'Brincar', cat:'atividades', phrase:'Quero brincar' },
-  { emoji:'📚', label:'Ler', cat:'atividades', phrase:'Quero ler' },
-  { emoji:'🎵', label:'Música', cat:'atividades', phrase:'Quero ouvir música' },
-  { emoji:'🚶', label:'Passear', cat:'atividades', phrase:'Quero passear' },
-  { emoji:'🍕', label:'Pizza', cat:'comida', phrase:'Quero pizza' },
-  { emoji:'🍌', label:'Banana', cat:'comida', phrase:'Quero banana' },
-  { emoji:'🥛', label:'Leite', cat:'comida', phrase:'Quero leite' },
-  { emoji:'🍪', label:'Biscoito', cat:'comida', phrase:'Quero biscoito' },
-  { emoji:'🤗', label:'Abraço', cat:'sentimentos', phrase:'Quero um abraço' },
-  { emoji:'🤒', label:'Doendo', cat:'necessidades', phrase:'Estou com dor' },
 ];
 
 const SEPOLIA_CHAIN_ID = "0xaa36a7";
-const seqData = [
-  { emoji:'⏰', label:'Acordar', order: 1 },
-  { emoji:'🦷', label:'Escovar dentes', order: 2 },
-  { emoji:'🚿', label:'Tomar banho', order: 3 },
-  { emoji:'👕', label:'Se vestir', order: 4 },
-  { emoji:'🥞', label:'Café da manhã', order: 5 },
-  { emoji:'🎒', label:'Pegar mochila', order: 6 },
-  { emoji:'🚌', label:'Ir para escola', order: 7 },
-  { emoji:'📚', label:'Estudar', order: 8 },
-];
-
-const emotionScenarios = [
-  { scenario: '🎁 Você ganhou um presente surpresa!', correct: '😄' },
-  { scenario: '😟 Você caiu e machucou o joelho.', correct: '😢' },
-  { scenario: '😤 Alguém pegou seu brinquedo favorito.', correct: '😠' },
-  { scenario: '🌙 Está na hora de dormir, mas você não quer.', correct: '😴' },
-  { scenario: '🎉 É seu aniversário e todos estão cantando!', correct: '🥳' },
-];
-
-const emotionOptions = [
-  { emoji:'😄', label:'Feliz' },
-  { emoji:'😢', label:'Triste' },
-  { emoji:'😠', label:'Com raiva' },
-  { emoji:'😴', label:'Com sono' },
-  { emoji:'🥳', label:'Animado' },
-  { emoji:'😨', label:'Com medo' },
-];
 
 let w3Provider = null;
 let w3Signer   = null;
@@ -1911,639 +747,11 @@ async function w3Connect() {
   if (!window.ethereum) {
     alert("MetaMask nao detectada. Instale em metamask.io e recarregue a pagina.");
     return;
-const sensorialSounds = [
-  { emoji:'🌊', label:'Ondas do mar', color:'blue' },
-  { emoji:'🌧️', label:'Chuva suave', color:'teal' },
-  { emoji:'🐦', label:'Pássaros', color:'green' },
-  { emoji:'🎵', label:'Música calma', color:'purple' },
-  { emoji:'🌬️', label:'Vento', color:'amber' },
-  { emoji:'🔔', label:'Sino de meditação', color:'coral' },
-];
-
-const clientes = [
-  { nome:'Família Almeida', crianca:'Theo, 6 anos', status:'Ativo', ultima:'08/05/2025', plano:'Premium' },
-  { nome:'Família Costa', crianca:'Maria, 8 anos', status:'Proposta', ultima:'05/05/2025', plano:'Básico' },
-  { nome:'Família Silva', crianca:'Gabriel, 9 anos', status:'Ativo', ultima:'09/05/2025', plano:'Premium' },
-  { nome:'Instituto Bem Estar', crianca:'Grupo (5 crianças)', status:'Proposta', ultima:'02/05/2025', plano:'Institucional' },
-  { nome:'Colégio Futuro', crianca:'Turma TEA', status:'Inativo', ultima:'15/04/2025', plano:'Institucional' },
-];
-
-const tasks = [
-  { text:'Enviar relatório para Família Almeida', done: false },
-  { text:'Confirmar sessão com Família Costa — 10/05', done: true },
-  { text:'Revisar atividades de sequência visual', done: false },
-  { text:'Atualizar plano terapêutico — Gabriel', done: false },
-];
-
-const agenda = [
-  { time:'09:00', client:'Família Almeida', type:'Consulta individual', color:'blue' },
-  { time:'10:30', client:'Gabriel Silva', type:'Sessão terapêutica', color:'teal' },
-  { time:'14:00', client:'Instituto Bem Estar', type:'Reunião institucional', color:'purple' },
-  { time:'16:00', client:'Família Costa', type:'Avaliação', color:'amber' },
-  { time:'17:30', client:'Dra. Ana — Supervisão', type:'Formação continuada', color:'coral' },
-];
-
-// ════ NAVIGATION ════
-function show(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  state.currentSection = id;
-  if (id === 'sec-profissional') initProApp();
-  if (id === 'sec-familia') initFamilyApp();
-}
-
-function showLogin(role) {
-  if (role) setLoginTab(role);
-  show('sec-login');
-}
-
-function showCad() { show('sec-cad'); }
-
-function doLogin() {
-  const role = state.loginRole;
-  showToast('Login realizado com sucesso!', 'success');
-  setTimeout(() => {
-    if (role === 'familia') show('sec-familia');
-    else show('sec-profissional');
-  }, 600);
-}
-
-function doRegistro() {
-  showToast('Conta criada! Bem-vinda à EcosFala!', 'success');
-  setTimeout(() => show('sec-familia'), 700);
-}
-
-function setLoginTab(role) {
-  state.loginRole = role;
-  ['familia','profissional','admin'].forEach(r => {
-    document.getElementById('tab-' + r).classList.toggle('active', r === role);
-  });
-}
-
-function scrollSection(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
-// ════ PRO APP ════
-function initProApp() {
-  renderTaskList();
-  renderClientesTable();
-  renderAgenda();
-  renderAnalytics();
-  renderVozPhrases();
-  setProTab('dashboard');
-}
-
-function setProTab(tab) {
-  state.proTab = tab;
-  document.querySelectorAll('[id^="pro-tab-"]').forEach(el => el.style.display = 'none');
-  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
-  const tabEl = document.getElementById('pro-tab-' + tab);
-  if (tabEl) tabEl.style.display = 'block';
-  const sbEl = document.getElementById('sb-' + tab);
-  if (sbEl) sbEl.classList.add('active');
-}
-
-function renderTaskList() {
-  const el = document.getElementById('tasks-list');
-  if (!el) return;
-  el.innerHTML = tasks.map((t, i) => `
-    <div style="display:flex;align-items:center;gap:.75rem;padding:.75rem;border-radius:10px;background:var(--gray-50);margin-bottom:.5rem;cursor:pointer;" onclick="toggleTask(${i})">
-      <div style="width:20px;height:20px;border-radius:50%;border:2px solid ${t.done ? 'var(--green)' : 'var(--gray-300)'};background:${t.done ? 'var(--green)' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;">
-        ${t.done ? '<i class="fas fa-check" style="color:#fff;font-size:.65rem;"></i>' : ''}
-      </div>
-      <span style="font-size:.85rem;font-weight:600;${t.done ? 'text-decoration:line-through;color:var(--gray-300);' : ''}">${t.text}</span>
-    </div>
-  `).join('');
-}
-
-function toggleTask(i) {
-  tasks[i].done = !tasks[i].done;
-  renderTaskList();
-  showToast(tasks[i].done ? 'Tarefa concluída!' : 'Tarefa reaberta', 'success');
-}
-
-function renderClientesTable() {
-  const el = document.getElementById('clientes-table-body');
-  if (!el) return;
-  const statusColor = { 'Ativo': 'teal', 'Inativo': 'amber', 'Proposta': 'blue', 'Institucional': 'purple' };
-  el.innerHTML = clientes.map(c => `
-    <tr style="border-bottom:1px solid var(--gray-100);" onmouseover="this.style.background='var(--gray-50)'" onmouseout="this.style.background=''">
-      <td style="padding:1rem 1.5rem;"><div style="font-weight:700;font-size:.88rem;">${c.nome}</div></td>
-      <td style="padding:1rem .5rem;font-size:.85rem;color:var(--gray-500);">${c.crianca}</td>
-      <td style="padding:1rem .5rem;"><span class="chip ${statusColor[c.status]||'blue'}">${c.status}</span></td>
-      <td style="padding:1rem .5rem;font-size:.82rem;color:var(--gray-500);">${c.ultima}</td>
-      <td style="padding:1rem .5rem;font-size:.82rem;font-weight:700;">${c.plano}</td>
-      <td style="padding:1rem .5rem;">
-        <button class="btn btn-ghost btn-sm" onclick="showToast('Abrindo perfil...','success')" style="margin-right:.35rem;"><i class="fas fa-eye"></i></button>
-        <button class="btn btn-ghost btn-sm" onclick="showToast('Editando...','success')"><i class="fas fa-edit"></i></button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function renderAgenda() {
-  const el = document.getElementById('agenda-list');
-  if (!el) return;
-  el.innerHTML = agenda.map(a => `
-    <div style="display:flex;align-items:center;gap:1rem;padding:.85rem;border-radius:10px;border-left:4px solid var(--${a.color});background:var(--${a.color}-light,var(--gray-50));margin-bottom:.6rem;">
-      <div style="font-weight:800;font-size:.95rem;color:var(--${a.color});min-width:50px;">${a.time}</div>
-      <div>
-        <div style="font-weight:700;font-size:.88rem;">${a.client}</div>
-        <div style="font-size:.75rem;color:var(--gray-500);">${a.type}</div>
-      </div>
-      <div style="margin-left:auto;display:flex;gap:.5rem;">
-        <button class="btn btn-ghost btn-sm" onclick="showToast('Confirmado!','success')" style="font-size:.7rem;"><i class="fas fa-check"></i></button>
-        <button class="btn btn-ghost btn-sm" onclick="showToast('Reagendado!','success')" style="font-size:.7rem;"><i class="fas fa-clock"></i></button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderAnalytics() {
-  // Bar chart
-  const barChart = document.getElementById('bar-chart');
-  const barLabels = document.getElementById('bar-labels');
-  const days = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-  const vals = [12,18,9,22,15,8,5];
-  const max = Math.max(...vals);
-  if (barChart && barLabels) {
-    barChart.innerHTML = vals.map((v,i) => `
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
-        <div class="chart-bar" style="height:${Math.round(v/max*100)}%;position:relative;" title="${v} atividades">
-          <span class="chart-bar-val">${v}</span>
-        </div>
-      </div>
-    `).join('');
-    barLabels.innerHTML = days.map(d => `<div style="flex:1;text-align:center;font-size:.7rem;color:var(--gray-500);">${d}</div>`).join('');
   }
-  // Word progress
-  const wordProgress = document.getElementById('word-progress');
-  const words = [['Água',85],['Fome',72],['Banheiro',68],['Brinca',60],['Cansado',45],['Ajuda',38]];
-  if (wordProgress) {
-    wordProgress.innerHTML = words.map(([w,v]) => `
-      <div class="progress-row">
-        <div class="progress-label">${w}</div>
-        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${v}%;background:var(--brand);"></div></div>
-        <div class="progress-val" style="color:var(--brand);">${v}%</div>
-      </div>
-    `).join('');
-  }
-  // Emotion chips
-  const chips = document.getElementById('emotion-chips');
-  const emojiData = [['😄 Alegre','42%','green'],['😌 Calmo','28%','teal'],['😰 Ansioso','15%','amber'],['😠 Agitado','10%','coral'],['😢 Triste','5%','blue']];
-  if (chips) {
-    chips.innerHTML = emojiData.map(([e,v,c]) => `<span class="emotion-chip" style="background:var(--${c}-light,var(--brand-light));color:var(--${c},var(--brand));">${e} <strong>${v}</strong></span>`).join('');
-  }
-  // Area progress
-  const areaProgress = document.getElementById('area-progress');
-  const areas = [['Comunicação',78,'brand'],['Emoções',64,'purple'],['Sequência',55,'teal'],['Sensorial',82,'green'],['Independência',48,'amber']];
-  if (areaProgress) {
-    areaProgress.innerHTML = areas.map(([a,v,c]) => `
-      <div class="progress-row">
-        <div class="progress-label">${a}</div>
-        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${v}%;background:var(--${c});"></div></div>
-        <div class="progress-val" style="color:var(--${c});">${v}%</div>
-      </div>
-    `).join('');
-}
-}
-
-function renderVozPhrases() {
-  const el = document.getElementById('pro-voice-phrases');
-  if (!el) return;
-  el.innerHTML = state.voicePhrases.map((p, i) => `
-    <div class="voice-phrase" onclick="playPhrase(this,'${p.replace(/'/g,"\\'")}')">
-      <i class="fas fa-volume-up voice-phrase-icon"></i>
-      <span class="voice-phrase-text">${p}</span>
-      <button class="btn btn-ghost btn-sm" style="flex-shrink:0;" onclick="event.stopPropagation();deletePhrase(${i})"><i class="fas fa-trash"></i></button>
-    </div>
-  `).join('');
-}
-
-// ════ FAMILY APP ════
-function initFamilyApp() {
-  renderFamilyPhrases();
-}
-
-function renderFamilyPhrases() {
-  const el = document.getElementById('voice-phrases-family');
-  if (!el) return;
-  el.innerHTML = state.voicePhrases.map((p, i) => `
-    <div class="voice-phrase" onclick="playPhrase(this,'${p.replace(/'/g,"\\'")}')">
-      <i class="fas fa-volume-up voice-phrase-icon"></i>
-      <span class="voice-phrase-text">${p}</span>
-    </div>
-  `).join('');
-}
-
-function addPhrase() {
-  const input = document.getElementById('new-phrase-input');
-  const val = input.value.trim();
-  if (!val) return;
-  state.voicePhrases.push(val);
-  input.value = '';
-  renderFamilyPhrases();
-  renderVozPhrases();
-  showToast('Frase adicionada!', 'success');
-}
-
-function addPhraseModal() {
-  const input = document.getElementById('modal-phrase-input');
-  const val = input.value.trim();
-  if (!val) return;
-  state.voicePhrases.push(val);
-  input.value = '';
-  renderModalPhrases();
-  renderFamilyPhrases();
-  showToast('Frase adicionada!', 'success');
-}
-
-function renderModalPhrases() {
-  const el = document.getElementById('voice-phrases-modal');
-  if (!el) return;
-  el.innerHTML = state.voicePhrases.map((p, i) => `
-    <div class="voice-phrase" onclick="playPhrase(this,'${p.replace(/'/g,"\\'")}')">
-      <i class="fas fa-volume-up voice-phrase-icon"></i>
-      <span class="voice-phrase-text">${p}</span>
-    </div>
-  `).join('');
-}
-
-function deletePhrase(i) {
-  state.voicePhrases.splice(i, 1);
-  renderVozPhrases();
-  renderFamilyPhrases();
-  showToast('Frase removida', 'success');
-}
-
-function playPhrase(el, phrase) {
-  // Browser TTS
-  if ('speechSynthesis' in window) {
-    const utter = new SpeechSynthesisUtterance(phrase);
-    utter.lang = 'pt-BR';
-    utter.rate = 0.9;
-    speechSynthesis.speak(utter);
-  }
-  el.style.background = 'var(--teal-light)';
-  el.style.borderColor = 'var(--teal)';
-  setTimeout(() => {
-    el.style.background = '';
-    el.style.borderColor = '';
-  }, 2000);
-}
-
-// ════ AAC ════
-function openActivity(act) {
-  if (act === 'aac') {
-    renderAACGrid();
-    showModal('modal-aac');
-  } else if (act === 'seq') {
-    initSeq();
-    showModal('modal-seq');
-  } else if (act === 'emotion') {
-    initEmotion();
-    showModal('modal-emotion');
-  } else if (act === 'sensorial') {
-    initSensorial();
-    showModal('modal-sensorial');
-  } else if (act === 'minha-voz') {
-    renderModalPhrases();
-    showModal('modal-minha-voz');
-  } else if (act === 'integracao') {
-    showToast('Atividade de Integração Sensorial — Em breve!', 'success');
-  }
-}
-
-function renderAACGrid() {
-  const filtered = state.aacCategory === 'all' ? aacCards : aacCards.filter(c => c.cat === state.aacCategory);
-  const el = document.getElementById('aac-grid');
-  if (!el) return;
-  el.innerHTML = filtered.map((c, i) => `
-    <div class="aac-card" onclick="selectAACCard(this,'${c.phrase.replace(/'/g,"\\'")}')">
-      <div class="aac-emoji">${c.emoji}</div>
-      <div class="aac-label">${c.label}</div>
-    </div>
-  `).join('');
-}
-
-function setAACCategory(btn, cat) {
-  state.aacCategory = cat;
-  document.querySelectorAll('.aac-category-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderAACGrid();
-}
-
-function selectAACCard(el, phrase) {
-  el.classList.add('speaking');
-  setTimeout(() => el.classList.remove('speaking'), 800);
-  state.aacOutput.push(phrase);
-  const outputEl = document.getElementById('aac-output-text');
-  if (outputEl) outputEl.textContent = state.aacOutput.join(' + ');
-  const speaking = document.getElementById('aac-speaking');
-  if (speaking) {
-    speaking.style.display = 'flex';
-    setTimeout(() => speaking.style.display = 'none', 1500);
-  }
-  if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(phrase);
-    u.lang = 'pt-BR'; u.rate = 0.9;
-    speechSynthesis.speak(u);
-  }
-  // stars
-  state.familyStars++;
-  const stars = document.getElementById('family-stars');
-  if (stars) stars.textContent = state.familyStars;
-}
-
-function clearAACOutput() {
-  state.aacOutput = [];
-  const el = document.getElementById('aac-output-text');
-  if (el) { el.textContent = 'Toque nos cartões para comunicar...'; el.style.color = 'var(--gray-300)'; }
-}
-
-function addCustomCard() {
-  const phrase = prompt('Nome do cartão:');
-  if (!phrase) return;
-  const emoji = prompt('Emoji (ex: 🌟):') || '⭐';
-  aacCards.push({ emoji, label: phrase, cat: 'all', phrase });
-  renderAACGrid();
-  showToast('Cartão criado!', 'success');
-}
-
-// ════ SEQUÊNCIA VISUAL ════
-function initSeq() {
-  state.seqItems = [...seqData].sort(() => Math.random() - 0.5);
-  renderSeq();
-  document.getElementById('seq-score').textContent = 0;
-  document.getElementById('seq-tries').textContent = 0;
-  const fb = document.getElementById('seq-feedback');
-  if (fb) fb.style.display = 'none';
-}
-
-function renderSeq() {
-  const el = document.getElementById('seq-grid');
-  if (!el) return;
-  el.innerHTML = state.seqItems.map((item, i) => `
-    <div class="seq-item" draggable="true" data-idx="${i}"
-      ondragstart="seqDragStart(event,${i})"
-      ondragover="event.preventDefault()"
-      ondrop="seqDrop(event,${i})">
-      <span class="seq-emoji">${item.emoji}</span>
-      <div style="font-size:.82rem;font-weight:700;">${item.label}</div>
-    </div>
-  `).join('');
-}
-
-let seqDragIdx = null;
-function seqDragStart(e, idx) { seqDragIdx = idx; }
-function seqDrop(e, idx) {
-  e.preventDefault();
-  if (seqDragIdx === null || seqDragIdx === idx) return;
-  const arr = [...state.seqItems];
-  const tmp = arr[seqDragIdx];
-  arr[seqDragIdx] = arr[idx];
-  arr[idx] = tmp;
-  state.seqItems = arr;
-  seqDragIdx = null;
-  renderSeq();
-}
-
-function checkSeq() {
-  const tries = parseInt(document.getElementById('seq-tries').textContent) + 1;
-  document.getElementById('seq-tries').textContent = tries;
-  const correct = state.seqItems.every((item, i) => item.order === i + 1);
-  const fb = document.getElementById('seq-feedback');
-  fb.style.display = 'block';
-  if (correct) {
-    fb.style.background = 'var(--green-light)';
-    fb.style.color = 'var(--green)';
-    fb.innerHTML = '🎉 Parabéns! Ordem correta! +10 estrelas';
-    state.familyStars += 10;
-    const stars = document.getElementById('family-stars');
-    if (stars) stars.textContent = state.familyStars;
-    const score = parseInt(document.getElementById('seq-score').textContent) + 10;
-    document.getElementById('seq-score').textContent = score;
-    showToast('Sequência correta! +10 ⭐', 'success');
-  } else {
-    fb.style.background = '#fef2f2';
-    fb.style.color = '#ef4444';
-    fb.innerHTML = '🔄 Tente novamente! Organize na ordem da rotina matinal.';
-  }
-}
-
-function shuffleSeq() {
-  state.seqItems = [...seqData].sort(() => Math.random() - 0.5);
-  renderSeq();
-  const fb = document.getElementById('seq-feedback');
-  if (fb) fb.style.display = 'none';
-}
-
-// ════ EMOÇÕES ════
-function initEmotion() {
-  state.emotionScore = 0;
-  state.emotionIdx = 0;
-  document.getElementById('emotion-score').textContent = 0;
-  renderEmotion();
-}
-
-function renderEmotion() {
-  const scene = emotionScenarios[state.emotionIdx % emotionScenarios.length];
-  document.getElementById('emotion-scenario').textContent = scene.scenario;
-  document.getElementById('emotion-feedback').style.display = 'none';
-  const el = document.getElementById('emotion-grid');
-  if (!el) return;
-  el.innerHTML = emotionOptions.map(opt => `
-    <div class="emotion-option" onclick="selectEmotion(this,'${opt.emoji}','${scene.correct}')">
-      <span class="emotion-emoji">${opt.emoji}</span>
-      <div style="font-size:.82rem;font-weight:700;">${opt.label}</div>
-    </div>
-  `).join('');
-}
-
-function selectEmotion(el, chosen, correct) {
-  document.querySelectorAll('.emotion-option').forEach(e => e.style.pointerEvents = 'none');
-  el.classList.add('selected');
-  const fb = document.getElementById('emotion-feedback');
-  fb.style.display = 'block';
-  if (chosen === correct) {
-    el.classList.add('correct');
-    fb.style.background = 'var(--green-light)';
-    fb.style.color = 'var(--green)';
-    fb.textContent = '🎉 Correto! Muito bem!';
-    state.emotionScore += 10;
-    document.getElementById('emotion-score').textContent = state.emotionScore;
-    if ('speechSynthesis' in window) {
-      const u = new SpeechSynthesisUtterance('Muito bem! Correto!');
-      u.lang = 'pt-BR'; speechSynthesis.speak(u);
-    }
-  } else {
-    el.classList.add('wrong');
-    fb.style.background = '#fef2f2';
-    fb.style.color = '#ef4444';
-    fb.textContent = `❌ Quase! A resposta seria ${correct}`;
-  }
-}
-
-function nextEmotion() {
-  state.emotionIdx++;
-  renderEmotion();
-}
-
-// ════ SENSORIAL ════
-function initSensorial() {
-  const el = document.getElementById('sensorial-grid');
-  if (!el) return;
-  el.innerHTML = sensorialSounds.map(s => `
-    <div class="card" style="text-align:center;cursor:pointer;" onclick="playSensorial(this,'${s.label}')">
-      <div style="font-size:2.5rem;margin-bottom:.5rem;">${s.emoji}</div>
-      <div style="font-weight:700;font-size:.88rem;">${s.label}</div>
-      <div class="speaking-indicator" style="justify-content:center;margin-top:.5rem;display:none;"></div>
-    </div>
-  `).join('');
-  const feelingsEl = document.getElementById('sensorial-feelings');
-  if (feelingsEl) {
-    feelingsEl.innerHTML = ['😌 Tranquilo','😊 Gostei','😐 Neutro','😟 Desconfortável','😵 Sobrecarga'].map(f => `
-      <button class="aac-category-btn" onclick="this.classList.toggle('active');showToast('Registro salvo!','success')">${f}</button>
-    `).join('');
-  }
-}
-
-function playSensorial(el, label) {
-  if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(label);
-    u.lang = 'pt-BR'; speechSynthesis.speak(u);
-  }
-  el.style.background = 'var(--teal-light)';
-  el.style.borderColor = 'var(--teal)';
-  setTimeout(() => { el.style.background = ''; el.style.borderColor = ''; }, 1500);
-}
-
-// ════ VOICE ENGINE ════
-function toggleRecord() {
-  if (!state.recording) {
-    state.recording = true;
-    state.recSeconds = 0;
-    const btn = document.getElementById('record-btn');
-    const icon = document.getElementById('record-icon');
-    const label = document.getElementById('record-label');
-    btn.className = 'record-btn recording';
-    icon.className = 'fas fa-stop';
-    label.textContent = 'Gravando... (clique para parar)';
-    renderWaveform(true);
-    state.recInterval = setInterval(() => {
-      state.recSeconds++;
-      const m = Math.floor(state.recSeconds / 60);
-      const s = state.recSeconds % 60;
-      document.getElementById('rec-time').textContent = m + ':' + String(s).padStart(2,'0');
-    }, 1000);
-    document.getElementById('train-btn').disabled = false;
-    document.getElementById('train-btn').style.opacity = '1';
-    document.getElementById('train-btn').style.cursor = 'pointer';
-  } else {
-    state.recording = false;
-    clearInterval(state.recInterval);
-    state.recCount++;
-    state.recTotalSeconds += state.recSeconds;
-    const tm = Math.floor(state.recTotalSeconds / 60);
-    const ts = state.recTotalSeconds % 60;
-    document.getElementById('rec-count').textContent = state.recCount;
-    document.getElementById('rec-duration').textContent = tm + ':' + String(ts).padStart(2,'0');
-    const btn = document.getElementById('record-btn');
-    const icon = document.getElementById('record-icon');
-    const label = document.getElementById('record-label');
-    btn.className = 'record-btn idle';
-    icon.className = 'fas fa-microphone';
-    label.textContent = 'Pressione para gravar';
-    renderWaveform(false);
-    showToast('Amostra de voz salva!', 'success');
-  }
-}
-
-function renderWaveform(active) {
-  const el = document.getElementById('waveform');
-  if (!el) return;
-  if (active) {
-    el.innerHTML = Array.from({length:20}, (_,i) => `<div class="wave-bar" style="height:${Math.random()*40+10}px;animation:bar ${(Math.random()*0.5+0.3).toFixed(2)}s ease-in-out infinite alternate;animation-delay:${(i*0.05).toFixed(2)}s;"></div>`).join('');
-    const animBars = () => {
-      if (!state.recording) return;
-      el.querySelectorAll('.wave-bar').forEach(b => b.style.height = (Math.random()*40+10)+'px');
-      setTimeout(animBars, 150);
-    };
-    animBars();
-  } else {
-    el.innerHTML = '<div style="font-size:.8rem;color:var(--gray-300);">Amostra gravada com sucesso!</div>';
-  }
-}
-
-function trainVoice() {
-  if (state.recCount === 0) { showToast('Grave ao menos uma amostra de voz!', 'error'); return; }
-  const btn = document.getElementById('train-btn');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Treinando modelo...';
-  btn.disabled = true;
-  showToast('Processando IA de clonagem de voz...', 'success');
-  setTimeout(() => {
-    btn.innerHTML = '<i class="fas fa-check-circle"></i> Modelo treinado com sucesso!';
-    btn.style.background = 'var(--green)';
-    showToast('Modelo de voz criado! ✨', 'success');
-  }, 3000);
-}
-
-function setTone(btn, tone) {
-  state.synthTone = tone;
-  document.querySelectorAll('.aac-category-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function synthesizeSpeech() {
-  const text = document.getElementById('tts-text').value;
-  if (!text) { showToast('Digite um texto para sintetizar!', 'error'); return; }
-  if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'pt-BR';
-    u.rate = state.synthTone === 'calmo' ? 0.85 : state.synthTone === 'alegre' ? 1.1 : 0.95;
-    u.pitch = state.synthTone === 'alegre' ? 1.2 : 1.0;
-    speechSynthesis.speak(u);
-  }
-  const result = document.getElementById('synth-result');
-  if (result) {
-    result.style.display = 'block';
-    document.getElementById('synth-tone-label').textContent = state.synthTone.charAt(0).toUpperCase() + state.synthTone.slice(1);
-  }
-  showToast('Áudio sintetizado com voz clonada!', 'success');
-}
-
-// ════ MODALS ════
-function showModal(id) {
-  document.getElementById(id).style.display = 'flex';
-}
-function closeModal() { document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none'); }
-function closeModalById(id) { document.getElementById(id).style.display = 'none'; }
-
-function openNewClient() { showModal('modal-new-client'); }
-function saveNewClient() {
-  closeModalById('modal-new-client');
-  showToast('Cliente cadastrado com sucesso!', 'success');
-}
-
-// ════ BLOCKCHAIN ════
-const CONTRACT_ADDRESS = "0x9474DEb6fc71Eed33553Dffe00261E43b7F99f69";
-const CONTRACT_ABI = [
-  { inputs:[{internalType:"string",name:"_valor",type:"string"}], name:"registrarDado", outputs:[], stateMutability:"nonpayable", type:"function" },
-  { anonymous:false, inputs:[{indexed:true,internalType:"address",name:"remetente",type:"address"},{indexed:false,internalType:"string",name:"valor",type:"string"},{indexed:false,internalType:"uint256",name:"timestamp",type:"uint256"}], name:"DadoRegistrado", type:"event" }
-];
-const SEPOLIA_CHAIN_ID = "0xaa36a7";
-let w3Provider=null,w3Signer=null;
-
-async function chainConnect() {
-  if (!window.ethereum) { alert("MetaMask não detectada."); return; }
-try {
+  try {
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const chainId = await window.ethereum.request({ method: "eth_chainId" });
-    await window.ethereum.request({method:"eth_requestAccounts"});
-    const chainId = await window.ethereum.request({method:"eth_chainId"});
-if (chainId !== SEPOLIA_CHAIN_ID) {
+    if (chainId !== SEPOLIA_CHAIN_ID) {
       try {
         await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: SEPOLIA_CHAIN_ID }] });
       } catch (switchErr) {
@@ -2556,45 +764,13 @@ if (chainId !== SEPOLIA_CHAIN_ID) {
           });
         } else { throw switchErr; }
       }
-      try { await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID}]}); }
-      catch(e) { if(e.code===4902) await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID,chainName:"Sepolia",nativeCurrency:{name:"SEP",symbol:"SEP",decimals:18},rpcUrls:["https://rpc.sepolia.org"],blockExplorerUrls:["https://sepolia.etherscan.io"]}]}); }
-}
-w3Provider = new ethers.BrowserProvider(window.ethereum);
+    }
+    w3Provider = new ethers.BrowserProvider(window.ethereum);
     w3Signer   = await w3Provider.getSigner();
     w3SetWalletUI(await w3Signer.getAddress());
   } catch (err) {
     alert("Erro ao conectar: " + (err.message || err));
-    w3Signer = await w3Provider.getSigner();
-    const addr = await w3Signer.getAddress();
-    document.getElementById('chain-status-text').textContent = 'Carteira conectada ✓';
-    document.getElementById('chain-wallet').textContent = addr.slice(0,6)+'...'+addr.slice(-4);
-    const rb = document.getElementById('chain-register-btn');
-    rb.disabled=false; rb.style.opacity='1'; rb.style.cursor='pointer';
-  } catch(e) { alert('Erro: ' + e.message); }
-}
-
-async function chainRegister() {
-  const val = document.getElementById('chain-input').value.trim();
-  if (!val) { alert('Preencha o campo'); return; }
-  if (!w3Signer) { alert('Conecte sua carteira primeiro'); return; }
-  document.getElementById('chain-result').style.display='block';
-  document.getElementById('chain-loading').style.display='block';
-  document.getElementById('chain-success').style.display='none';
-  document.getElementById('chain-error').style.display='none';
-  try {
-    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
-    const tx = await c.registrarDado(val);
-    const receipt = await tx.wait(1);
-    const hash = receipt.hash||tx.hash;
-    document.getElementById('chain-loading').style.display='none';
-    document.getElementById('chain-success').style.display='block';
-    document.getElementById('chain-tx-hash').textContent=hash;
-    document.getElementById('chain-etherscan-link').href='https://sepolia.etherscan.io/tx/'+hash;
-  } catch(e) {
-    document.getElementById('chain-loading').style.display='none';
-    document.getElementById('chain-error').style.display='block';
-    document.getElementById('chain-error-msg').textContent=e.reason||e.message||'Erro desconhecido';
-}
+  }
 }
 
 async function w3Register() {
@@ -2602,46 +778,17 @@ async function w3Register() {
   if (!valor) { alert("Preencha o campo com o dado a registrar."); return; }
   if (!w3Signer) { alert("Conecte sua carteira MetaMask primeiro."); return; }
   w3ShowLoading(true);
-async function chainConnect2() {
-  await chainConnect();
-  if (w3Signer) {
-    const addr = await w3Signer.getAddress();
-    document.getElementById('chain-status-text2').textContent='Conectada ✓';
-    document.getElementById('chain-wallet2').textContent=addr.slice(0,6)+'...'+addr.slice(-4);
-    const rb=document.getElementById('chain-register-btn2');
-    rb.disabled=false;rb.style.opacity='1';rb.style.cursor='pointer';
-  }
-}
-
-async function chainRegister2() {
-  const val = document.getElementById('chain-input2').value.trim();
-  if (!val||!w3Signer) return;
-  document.getElementById('chain-result2').style.display='block';
-  document.getElementById('chain-loading2').style.display='block';
-  document.getElementById('chain-success2').style.display='none';
-  document.getElementById('chain-error2').style.display='none';
-try {
+  try {
     const contrato = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
     const tx = await contrato.registrarDado(valor);
-    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
-    const tx = await c.registrarDado(val);
-const receipt = await tx.wait(1);
+    const receipt = await tx.wait(1);
     w3ShowSuccess(receipt.hash || tx.hash);
   } catch (err) {
     let msg = err.reason || err.message || "Erro desconhecido.";
     if (msg.includes("user rejected")) msg = "Transacao rejeitada pelo usuario na MetaMask.";
     if (msg.includes("insufficient funds")) msg = "Saldo insuficiente. Obtenha SepoliaETH em sepoliafaucet.com.";
     w3ShowError(msg);
-    const hash = receipt.hash||tx.hash;
-    document.getElementById('chain-loading2').style.display='none';
-    document.getElementById('chain-success2').style.display='block';
-    document.getElementById('chain-tx-hash2').textContent=hash;
-    document.getElementById('chain-explorer2').href='https://sepolia.etherscan.io/tx/'+hash;
-  } catch(e) {
-    document.getElementById('chain-loading2').style.display='none';
-    document.getElementById('chain-error2').style.display='block';
-    document.getElementById('chain-error-msg2').textContent=e.reason||e.message||'Erro';
-}
+  }
 }
 
 if (window.ethereum) {
@@ -2649,28 +796,5 @@ if (window.ethereum) {
     if (accounts.length === 0) location.reload();
     else w3SetWalletUI(accounts[0]);
   });
-// ════ TOAST ════
-function showToast(msg, type='success') {
-  const el = document.getElementById('toast');
-  const msgEl = document.getElementById('toast-msg');
-  const icon = el.querySelector('.toast-icon');
-  msgEl.textContent = msg;
-  el.className = 'toast ' + type;
-  if (type === 'success') icon.className = 'fas fa-check-circle toast-icon';
-  else icon.className = 'fas fa-exclamation-circle toast-icon';
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 3000);
 }
-
-// ════ INIT ════
-window.addEventListener('DOMContentLoaded', () => {
-  // Demo login hints
-  document.getElementById('login-email').value = 'gabriel@ecosfala.com.br';
-  document.getElementById('login-pass').value = '••••••••';
-});
-
-// ESC closes modals
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
-</body>
-</html>
