@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcosFala - Dando voz ao silêncio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #FFFFFF;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EcosFala — Dando voz ao silêncio</title>
@@ -288,6 +319,35 @@
   .w-full { width: 100%; }
 </style>
 </head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <svg class="h-8 w-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625.055 1.83-1.023 4.456-1.993 6.368 2.602-.47 6.301-1.508 7.978-2.536 1.418.345 2.775.503 4.059.503 7.084 0 11.91-4.837 11.91-9.96-.001-5.811-5.702-10.007-12.001-10.007zm0 14c-.565 0-1.024-.459-1.024-1.025 0-.565.459-1.024 1.024-1.024.566 0 1.024.459 1.024 1.024 0 .566-.458 1.025-1.024 1.025zm1.606-4.858c-.74.799-.775 1.241-.766 1.785h-1.643c-.006-1.208.16-1.742 1.244-2.915.771-.792 1.1-1.432 1.1-2.205 0-1.366-1.028-1.966-2.31-1.966-1.27 0-2.49.782-2.49 2.126v.041h-1.707c0-1.584 1.286-3.87 4.208-3.87 2.987 0 4.029 1.674 4.029 3.454 0 1.312-.52 2.309-1.665 3.55z"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-bold text-blue-600">EcosFala</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#como-funciona" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Como Funciona</a>
+                    <a href="#beneficios" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Benefícios</a>
+                    <a href="#depoimentos" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Depoimentos</a>
+                    <a href="#faq" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">FAQ</a>
+                    <a href="#blockchain" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1">⬡ Blockchain</a>
+                    <a href="#contato" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Contato</a>
+                    <a href="login.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Login</a>
+                </div>
+                <div class="flex md:hidden items-center">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false">
+                        <span class="sr-only">Abrir menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
 <body>
 
 <!-- ═══ TOAST ═══ -->
@@ -326,14 +386,58 @@
         <div class="hero-btns">
           <button class="btn btn-white" onclick="showCad()"><i class="fas fa-users"></i> Cadastrar Família</button>
           <button class="btn btn-outline-white" onclick="showLogin('profissional')"><i class="fas fa-user-md"></i> Área do Psicólogo</button>
-        </div>
+</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient relative pt-24 pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2 text-white">
+                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+                        Dando voz ao silêncio
+                    </h1>
+                    <p class="text-xl lg:text-2xl mb-8">
+                        A EcosFala usa tecnologia de clonagem de voz para criar uma ponte de comunicação para crianças não verbais, utilizando vozes familiares em atividades terapêuticas.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="pages/cad.html" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 transition duration-300 shadow-lg">
+                            Cadastrar Família
+                        </a>
+                        <a href="/profissional" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 transition duration-300 shadow-lg">
+                            Área do Psicólogo
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 lg:mt-0 lg:w-1/2">
+                    <img src="/EcosFala/assets/400.PNG" alt="Criança interagindo com EcosFala" class="rounded-lg shadow-xl transform rotate-2 hover:rotate-0 transition duration-300">
+                </div>
+            </div>
       </div>
       <div class="hero-visual">
         <div style="text-align:center; margin-bottom:1.5rem;">
           <div style="font-size:4rem; margin-bottom:.5rem;">🗣️</div>
           <div style="color:#fff; font-weight:800; font-size:1.2rem;">Plataforma de Comunicação</div>
           <div style="color:rgba(255,255,255,.8); font-size:.85rem;">para crianças no espectro autista</div>
+</div>
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
         </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Como a EcosFala Funciona
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Um processo simples e eficaz para criar uma experiência de comunicação personalizada
+                </p>
+            </div>
         <div class="hero-stats">
           <div class="hero-stat">
             <div class="hero-stat-num">2.4k+</div>
@@ -356,6 +460,40 @@
     </div>
   </section>
 
+            <div class="grid md:grid-cols-3 gap-10 mt-12">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-lg p-6 shadow-md transition duration-300 feature-card">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cadastro e Perfil</h3>
+                    <p class="text-gray-600">
+                        Famílias criam uma conta e preenchem o perfil da criança com informações relevantes para personalização das atividades.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-lg p-6 shadow-md transition duration-300 feature-card">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Coleta de Voz</h3>
+                    <p class="text-gray-600">
+                        Um familiar grava amostras de sua voz, que são processadas por nossa tecnologia de IA para criar um modelo de voz personalizado.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-lg p-6 shadow-md transition duration-300 feature-card">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Atividades Terapêuticas</h3>
+                    <p class="text-gray-600">
+                        Acesse atividades personalizadas onde a criança ouve instruções narradas com a voz familiar, criando um ambiente seguro e acolhedor.
+                    </p>
+                </div>
+            </div>
   <!-- COMO FUNCIONA -->
   <div id="como-funciona" style="padding: 5rem 1.5rem; background: #fff;">
     <div class="features" style="margin:0 auto; max-width:1100px;">
@@ -386,6 +524,14 @@
     </div>
   </div>
 
+            <div class="mt-16 text-center">
+                <a href="https://youtu.be/lddvls3R0po" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800">
+                    Assista ao vídeo demonstrativo
+                    <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
   <!-- BENEFICIOS -->
   <div id="beneficios" style="padding: 5rem 1.5rem; background: var(--gray-50);">
     <div style="max-width:1100px; margin:0 auto;">
@@ -415,7 +561,20 @@
             <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#f093fb,#f5576c);">AM</div>
             <div><div style="font-weight:700;font-size:.85rem;">Ana Meireles</div><div style="font-size:.75rem;color:var(--gray-500);">Mãe de Miguel, 7 anos</div></div>
           </div>
-        </div>
+</div>
+    </section>
+
+    <!-- Benefícios Section -->
+    <section id="beneficios" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Benefícios da EcosFala
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ajudando crianças não verbais a se conectarem com o mundo através de vozes familiares
+                </p>
+            </div>
         <div class="card" style="border-left: 4px solid var(--teal);">
           <div style="font-size:1.5rem; margin-bottom:.75rem;">⭐⭐⭐⭐⭐</div>
           <p style="font-size:.9rem; color:var(--gray-700); margin-bottom:1rem; font-style:italic;">"Como psicóloga, a ferramenta transformou minha prática. Os relatórios de engajamento emocional me ajudam a ajustar as sessões de forma muito mais precisa."</p>
@@ -428,6 +587,73 @@
     </div>
   </div>
 
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-brain text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Redução da Ansiedade</h3>
+                    <p class="text-gray-600">
+                        Ouvir uma voz familiar reduz a ansiedade e cria um ambiente seguro para aprendizado e terapia.
+                    </p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-users text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Laços Familiares</h3>
+                    <p class="text-gray-600">
+                        Fortalece a conexão entre a criança e familiares, mesmo quando fisicamente separados.
+                    </p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-chart-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Progresso Consistente</h3>
+                    <p class="text-gray-600">
+                        Acompanhamento detalhado do desenvolvimento, permitindo ajustes personalizados às necessidades.
+                    </p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-tools text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Ferramentas Adaptativas</h3>
+                    <p class="text-gray-600">
+                        Atividades que se ajustam automaticamente ao nível de desenvolvimento da criança.
+                    </p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-user-md text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Suporte Profissional</h3>
+                    <p class="text-gray-600">
+                        Psicólogos e terapeutas podem criar atividades específicas para cada caso e monitorar resultados.
+                    </p>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="bg-white rounded-lg shadow-md p-6 transition duration-300 feature-card">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-home text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Uso Residencial</h3>
+                    <p class="text-gray-600">
+                        Continue o desenvolvimento terapêutico no conforto de casa, complementando sessões presenciais.
+                    </p>
+                </div>
+            </div>
   <!-- BLOCKCHAIN SECTION -->
   <div id="blockchain" style="padding: 5rem 1.5rem; background: var(--gray-900);">
     <div style="max-width:800px; margin:0 auto;">
@@ -438,7 +664,20 @@
           <span class="chain-dot"></span>
           <span id="chain-status-text" style="font-weight:600;">Aguardando conexão com MetaMask</span>
           <span id="chain-wallet" class="chain-mono" style="margin-left:auto;"></span>
-        </div>
+</div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section id="depoimentos" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Histórias de Transformação
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Veja como a EcosFala está ajudando famílias em todo o Brasil
+                </p>
+            </div>
         <div class="form-group">
           <label class="form-label" style="color:#94a3b8;">Dado clínico ou hash de consentimento a registrar</label>
           <input type="text" id="chain-input" class="form-input" style="background:#1e293b;border-color:#334155;color:#e2e8f0;" placeholder="Ex: CONSENTIMENTO_VOZ_PACIENTE_2024_001">
@@ -461,6 +700,49 @@
     </div>
   </div>
 
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-blue-50 rounded-lg p-6 shadow-md relative">
+                    <div class="absolute -top-5 -left-5 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-quote-left text-white text-xl"></i>
+                    </div>
+                    <div class="pl-8">
+                        <p class="italic text-gray-700 mb-4">
+                            "A EcosFala transformou nossa rotina. Meu filho Lucas, de 6 anos, que tem autismo não verbal, agora consegue interagir com as atividades usando minha voz. É incrível ver como ele se conecta e se engaja mais quando ouve as instruções com uma voz familiar."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="/api/placeholder/40/40" alt="Foto de perfil">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Mariana Silva</p>
+                                <p class="text-sm text-gray-500">Mãe do Lucas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-blue-50 rounded-lg p-6 shadow-md relative">
+                    <div class="absolute -top-5 -left-5 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-quote-left text-white text-xl"></i>
+                    </div>
+                    <div class="pl-8">
+                        <p class="italic text-gray-700 mb-4">
+                            "Como psicóloga especializada em TEA, posso dizer que a EcosFala é uma ferramenta revolucionária. Consigo personalizar atividades e meus pacientes respondem muito melhor às instruções quando ouvem a voz dos pais. Tenho observado progressos significativos em metade do tempo."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="/api/placeholder/40/40" alt="Foto de perfil">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Dra. Patrícia Mendes</p>
+                                <p class="text-sm text-gray-500">Psicóloga, CRP 06/12345</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
   <!-- FOOTER -->
   <footer style="background:#111827;color:#9ca3af;padding:3rem 1.5rem;">
     <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;">
@@ -474,7 +756,20 @@
           <a href="#" onclick="showLogin()" style="color:#9ca3af;text-decoration:none;">Área do Psicólogo</a>
           <a href="#" onclick="showCad()" style="color:#9ca3af;text-decoration:none;">Cadastrar Família</a>
           <a href="#" style="color:#9ca3af;text-decoration:none;">API Docs</a>
-        </div>
+</div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Perguntas Frequentes
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Respostas para as dúvidas mais comuns sobre a EcosFala
+                </p>
+            </div>
       </div>
       <div>
         <div style="font-weight:700;color:#fff;margin-bottom:.75rem;">Empresa</div>
@@ -523,6 +818,66 @@
   </div>
 </section>
 
+            <div class="space-y-8">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Como funciona a clonagem de voz?</h3>
+                            <i class="fas fa-chevron-down text-blue-500"></i>
+                        </div>
+                    </button>
+                    <div class="px-6 pb-4">
+                        <p class="text-gray-600">
+                            Nossa tecnologia utiliza inteligência artificial para analisar amostras de voz e criar um modelo personalizado. Você grava cerca de 20 frases diferentes, e nosso sistema aprende os padrões da sua voz. Depois, podemos sintetizar qualquer texto com características muito similares à voz original.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">A plataforma é segura para crianças?</h3>
+                            <i class="fas fa-chevron-down text-blue-500"></i>
+                        </div>
+                    </button>
+                    <div class="px-6 pb-4">
+                        <p class="text-gray-600">
+                            Sim, a EcosFala foi projetada com segurança como prioridade. Todas as atividades são adequadas para crianças e desenvolvidas por especialistas. Os dados são criptografados e protegidos seguindo rigorosos padrões de segurança e conformidade com a LGPD.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Quanto tempo leva para processar a voz?</h3>
+                            <i class="fas fa-chevron-down text-blue-500"></i>
+                        </div>
+                    </button>
+                    <div class="px-6 pb-4">
+                        <p class="text-gray-600">
+                            Após enviar as amostras de voz, o processamento leva aproximadamente 30 minutos. Você receberá uma notificação quando o modelo estiver pronto para uso nas atividades terapêuticas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Como os psicólogos podem se cadastrar?</h3>
+                            <i class="fas fa-chevron-down text-blue-500"></i>
+                        </div>
+                    </button>
+                    <div class="px-6 pb-4">
+                        <p class="text-gray-600">
+                            Profissionais de psicologia podem se cadastrar na área específica do site. É necessário fornecer o número do registro profissional (CRP) para validação. Após a verificação, o profissional tem acesso ao dashboard para criar e gerenciar atividades para seus pacientes.
+                        </p>
+                    </div>
+                </div>
 <!-- ═══ CADASTRO ═══ -->
 <section class="section" id="sec-cad">
   <div class="login-page" style="align-items:flex-start;padding-top:2rem;">
@@ -704,9 +1059,74 @@
             <div style="display:flex;gap:.75rem;">
               <button class="btn btn-ghost btn-sm" onclick="showToast('Sincronizado!','success')"><i class="fas fa-sync"></i> Sincronizar</button>
               <button class="btn btn-primary btn-sm" onclick="openNewClient()"><i class="fas fa-plus"></i> Novo Cliente</button>
-            </div>
+</div>
           </div>
+</div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SEÇÃO BLOCKCHAIN WEB3 — Integração EcosFala + Sepolia
+    ═══════════════════════════════════════════════════════════ -->
+    <section id="blockchain" class="py-20 bg-white relative overflow-hidden">
+      <!-- Fundo decorativo sutil -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 90% 50%,rgba(79,172,254,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        <!-- Cabeçalho da seção -->
+        <div class="text-center mb-14">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 mb-4 tracking-widest uppercase">
+            ⬡ Blockchain · Sepolia Testnet
+          </span>
+          <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Registro Imutável na Blockchain
+          </h2>
+          <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+            Consentimentos, marcos terapêuticos e registros de progresso gravados de forma permanente,
+            transparente e auditável — sem intermediários, sem servidores centralizados.
+          </p>
         </div>
+
+        <!-- Grid: explicação + painel interativo -->
+        <div class="lg:grid lg:grid-cols-2 lg:gap-14 items-start">
+
+          <!-- Coluna esquerda: como funciona -->
+          <div class="mb-12 lg:mb-0">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">Como a integração funciona</h3>
+
+            <div class="space-y-6">
+              <!-- Passo 1 -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">1</div>
+                <div>
+                  <p class="font-semibold text-gray-800">Ambiente Remix IDE + Solidity ^0.8.x</p>
+                  <p class="text-gray-500 text-sm mt-1">O contrato inteligente foi escrito em Solidity, compilado e inspecionado via ABI no Remix IDE — sem necessidade de configuração local.</p>
+                </div>
+              </div>
+              <!-- Passo 2 -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">2</div>
+                <div>
+                  <p class="font-semibold text-gray-800">Deploy na Testnet Sepolia via MetaMask</p>
+                  <p class="text-gray-500 text-sm mt-1">O contrato foi implantado na rede Sepolia (Ethereum). Nenhum Ether real é utilizado — ambiente seguro para validações acadêmicas e de desenvolvimento.</p>
+                </div>
+              </div>
+              <!-- Passo 3 -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">3</div>
+                <div>
+                  <p class="font-semibold text-gray-800">Integração front-end via ethers.js</p>
+                  <p class="text-gray-500 text-sm mt-1">O site detecta automaticamente o provedor MetaMask e solicita autorização ao usuário antes de qualquer transação. Toda comunicação ocorre via <code class="bg-gray-100 px-1 rounded text-xs">ethers.js</code>.</p>
+                </div>
+              </div>
+              <!-- Passo 4 -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">4</div>
+                <div>
+                  <p class="font-semibold text-gray-800">Evento <code class="bg-gray-100 px-1 rounded text-xs">DadoRegistrado</code> no explorador de blocos</p>
+                  <p class="text-gray-500 text-sm mt-1">Cada transação emite um evento contendo o endereço do remetente, o valor gravado e o timestamp do bloco — rastreável publicamente no Etherscan da Sepolia.</p>
+                </div>
+              </div>
         <!-- Stats -->
         <div class="stats-row">
           <div class="stat-card"><div class="label">Clientes Ativos</div><div class="value" style="color:var(--brand);">32</div><div class="delta">↑ +3 este mês</div></div>
@@ -744,7 +1164,7 @@
             <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Tarefas Pendentes</div>
             <div id="tasks-list">
               <!-- filled by JS -->
-            </div>
+</div>
           </div>
           <div>
             <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Ações Rápidas</div>
@@ -755,6 +1175,14 @@
         </div>
       </div>
 
+            <!-- Badges técnicos -->
+            <div class="flex flex-wrap gap-2 mt-8">
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">Solidity ^0.8.x</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">ethers.js v6</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">MetaMask</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">Sepolia Testnet</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">Remix IDE</span>
+            </div>
       <!-- clientes tab -->
       <div id="pro-tab-clientes" style="display:none;">
         <div class="page-header">
@@ -767,7 +1195,7 @@
           <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--gray-200);display:flex;gap:.75rem;">
             <input class="form-input" placeholder="🔍 Buscar clientes..." style="max-width:300px;">
             <select class="form-select" style="width:auto;"><option>Todos os status</option><option>Ativo</option><option>Inativo</option><option>Proposta</option></select>
-          </div>
+</div>
           <table style="width:100%;border-collapse:collapse;">
             <thead><tr style="background:var(--gray-50);">
               <th style="padding:.85rem 1.5rem;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;">Nome</th>
@@ -783,6 +1211,7 @@
         </div>
       </div>
 
+          <!-- Coluna direita: painel interativo -->
       <!-- agendamentos tab -->
       <div id="pro-tab-agendamentos" style="display:none;">
         <div class="page-header"><h2>Agendamentos</h2><p>Gerencie consultas e sessões terapêuticas</p></div>
@@ -791,7 +1220,99 @@
             <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Esta semana — Maio 2025</div>
             <div id="agenda-list"></div>
           </div>
-          <div>
+<div>
+            <div class="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
+
+              <!-- Barra superior estilo terminal -->
+              <div class="flex items-center gap-2 px-5 py-3 bg-gray-900">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                <span class="ml-3 text-xs text-gray-400 font-mono">EcosFala · Blockchain · Sepolia</span>
+              </div>
+
+              <div class="p-6">
+
+                <!-- Status da carteira -->
+                <div id="w3-wallet-status" class="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                  <div class="flex items-center gap-2">
+                    <span id="w3-dot" class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-colors duration-300"></span>
+                    <span id="w3-wallet-label" class="text-sm text-gray-500 font-mono">Carteira não conectada</span>
+                  </div>
+                  <button id="w3-connect-btn"
+                    onclick="w3Connect()"
+                    class="text-xs font-semibold px-4 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                    Conectar MetaMask
+                  </button>
+                </div>
+
+                <!-- Campo de registro -->
+                <div class="mb-4">
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Dado a registrar na blockchain</label>
+                  <textarea id="w3-input" rows="3"
+                    placeholder="Ex: Consentimento registrado — Sessão terapêutica 01 — Lucas Silva — 09/05/2025"
+                    class="w-full border border-gray-300 rounded-xl p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none font-mono"
+                  ></textarea>
+                </div>
+
+                <!-- Botão de registrar -->
+                <button id="w3-register-btn"
+                  onclick="w3Register()"
+                  disabled
+                  class="w-full py-3 rounded-xl font-bold text-sm transition-all duration-200
+                    bg-gray-100 text-gray-400 cursor-not-allowed
+                    disabled:opacity-60"
+                  style="transition:background .2s,color .2s">
+                  ⬡ Registrar na Blockchain
+                </button>
+
+                <!-- Área de resultado -->
+                <div id="w3-result" class="hidden mt-5">
+                  <!-- Status loading -->
+                  <div id="w3-loading" class="hidden flex items-center gap-3 text-sm text-blue-600 font-medium">
+                    <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                    </svg>
+                    Aguardando confirmação na rede Sepolia…
+                  </div>
+
+                  <!-- Sucesso -->
+                  <div id="w3-success" class="hidden">
+                    <div class="flex items-center gap-2 mb-3">
+                      <svg class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span class="font-bold text-green-700 text-sm">Transação confirmada na Sepolia!</span>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl border border-gray-200 p-3 font-mono text-xs text-gray-600 break-all mb-3">
+                      <span class="block text-gray-400 mb-1">Transaction Hash:</span>
+                      <span id="w3-tx-hash" class="text-blue-600"></span>
+                    </div>
+                    <a id="w3-etherscan-link" href="#" target="_blank"
+                      class="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-semibold">
+                      Ver no Sepolia Etherscan
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                    </a>
+                  </div>
+
+                  <!-- Erro -->
+                  <div id="w3-error" class="hidden flex items-start gap-2 text-sm text-red-600">
+                    <svg class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span id="w3-error-msg"></span>
+                  </div>
+                </div>
+
+                <!-- Nota técnica -->
+                <p class="mt-5 text-xs text-gray-400 text-center leading-relaxed">
+                  Rede: <strong>Sepolia Testnet</strong> · Nenhum valor real é transacionado.<br>
+                  Função: <code>registrarDado(string _valor)</code>
+                </p>
+              </div>
             <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;margin-bottom:1rem;">
               <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Novo Agendamento</div>
               <div class="form-group"><label class="form-label">Cliente</label><select class="form-select"><option>Família Almeida</option><option>Família Costa</option><option>Instituto Bem Estar</option></select></div>
@@ -799,11 +1320,17 @@
               <div class="form-group"><label class="form-label">Horário</label><input type="time" class="form-input" value="09:00"></div>
               <div class="form-group"><label class="form-label">Tipo</label><select class="form-select"><option>Consulta individual</option><option>Sessão terapêutica</option><option>Reunião familiar</option><option>Avaliação</option></select></div>
               <button class="btn btn-primary w-full" style="justify-content:center;" onclick="showToast('Agendamento criado!','success')"><i class="fas fa-calendar-plus"></i> Agendar</button>
-            </div>
+</div>
           </div>
         </div>
       </div>
 
+            <!-- Prova de conceito: info adicional -->
+            <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+              <p class="text-xs text-blue-700 leading-relaxed">
+                <strong>Conclusão técnica:</strong> A transação é validada pelos nós da rede Sepolia, incluída em um bloco confirmado e permanentemente registrada na cadeia. Um hash único é gerado e consultável publicamente no explorador de blocos, comprovando integridade e imutabilidade do dado gravado.
+              </p>
+            </div>
       <!-- analytics tab -->
       <div id="pro-tab-analytics" style="display:none;">
         <div class="page-header"><h2>Analytics & Relatórios</h2><p>Acompanhe a evolução dos seus pacientes</p></div>
@@ -825,7 +1352,7 @@
             <div style="display:flex;flex-wrap:wrap;" id="emotion-chips"></div>
             <div class="divider"></div>
             <div style="font-size:.82rem;color:var(--gray-500);">Análise das últimas 4 semanas. Padrão: <strong>Engajamento crescente</strong> com menor frequência de sobrecarga sensorial.</div>
-          </div>
+</div>
           <!-- Progresso geral -->
           <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;">
             <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1.25rem;">Progresso por Área</div>
@@ -835,8 +1362,26 @@
         <div style="margin-top:1.5rem;text-align:right;">
           <button class="btn btn-ghost btn-sm" onclick="showToast('Relatório PDF gerado!','success')"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
           <button class="btn btn-primary btn-sm" onclick="setProTab('blockchain')"><i class="fas fa-link"></i> Registrar na Blockchain</button>
-        </div>
-      </div>
+</div>
+</div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                Pronto para transformar a experiência terapêutica?
+            </h2>
+            <p class="mt-4 text-xl text-blue-100 max-w-3xl mx-auto">
+                Junte-se a centenas de famílias que já estão usando a EcosFala para criar uma ponte de comunicação para suas crianças.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="pages/cad.html" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 transition duration-300 shadow-lg">
+                    Começar Agora
+                </a>
+                <a href="#contato" class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-blue-700 transition duration-300">
+                    Fale Conosco
+                </a>
 
       <!-- motor de voz tab -->
       <div id="pro-tab-voz" style="display:none;">
@@ -850,7 +1395,51 @@
             <div style="text-align:center;font-size:.82rem;color:var(--gray-500);margin-bottom:.5rem;" id="record-label">Pressione para gravar</div>
             <div class="waveform" id="waveform">
               <div style="font-size:.8rem;color:var(--gray-300);">Aguardando gravação...</div>
-            </div>
+</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<section id="contato" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Entre em Contato</h2>
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                Estamos aqui para responder suas dúvidas e ajudar sua família
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div>
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700">Assunto</label>
+                        <select id="subject" name="subject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border">
+                            <option value="">Selecione um assunto</option>
+                            <option value="info">Informações gerais</option>
+                            <option value="support">Suporte técnico</option>
+                            <option value="partnership">Parcerias</option>
+                            <option value="other">Outro assunto</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Mensagem</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+                            Enviar Mensagem
+                        </button>
+                    </div>
+                </form>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:1.25rem;">
               <div style="background:var(--gray-50);border-radius:8px;padding:.75rem;text-align:center;">
                 <div style="font-size:1.1rem;font-weight:700;color:var(--brand);" id="rec-time">0:00</div>
@@ -864,7 +1453,20 @@
                 <div style="font-size:1.1rem;font-weight:700;color:var(--amber);" id="rec-duration">0:00</div>
                 <div style="font-size:.7rem;color:var(--gray-500);">Total gravado</div>
               </div>
-            </div>
+</div>
+            <div class="bg-gray-50 p-8 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-blue-500">
+                            <i class="fas fa-envelope mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Email</p>
+                            <p class="text-sm text-gray-600">ecosfala@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
             <button class="btn btn-primary w-full" style="justify-content:center;" id="train-btn" onclick="trainVoice()" disabled><i class="fas fa-robot"></i> Treinar modelo de voz</button>
           </div>
           <!-- Painel de Emoções / Síntese -->
@@ -874,7 +1476,7 @@
             <div class="form-group">
               <label class="form-label">Texto para sintetizar</label>
               <textarea class="form-input" id="tts-text" rows="3" placeholder="Digite o texto que será convertido para a voz clonada...">Olá! Vamos brincar juntos hoje?</textarea>
-            </div>
+</div>
             <div class="form-group">
               <label class="form-label">Tom emocional</label>
               <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
@@ -894,7 +1496,9 @@
               <div style="font-size:.82rem;color:var(--gray-700);">Tom: <strong id="synth-tone-label">Calmo</strong> • Duração estimada: ~3.2s</div>
             </div>
           </div>
-        </div>
+</div>
+    </div>
+</section>
         <!-- Gerenciar frases -->
         <div style="background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:1.5rem;margin-top:1.5rem;">
           <div style="font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:1rem;">Frases salvas — Voz de: Maria (mãe)</div>
@@ -902,6 +1506,18 @@
         </div>
       </div>
 
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center mb-4">
+                    <svg class="h-8 w-8 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625.055 1.83-1.023 4.456-1.993 6.368 2.602-.47 6.301-1.508 7.978-2.536 1.418.345 2.775.503 4.059.503 7.084 0 11.91-4.837 11.91-9.96-.001-5.811-5.702-10.007-12.001-10.007zm0 14c-.565 0-1.024-.459-1.024-1.025 0-.565.459-1.024 1.024-1.024.566 0 1.024.459 1.024 1.024 0 .566-.458 1.025-1.024 1.025zm1.606-4.858c-.74.799-.775 1.241-.766 1.785h-1.643c-.006-1.208.16-1.742 1.244-2.915.771-.792 1.1-1.432 1.1-2.205 0-1.366-1.028-1.966-2.31-1.966-1.27 0-2.49.782-2.49 2.126v.041h-1.707c0-1.584 1.286-3.87 4.208-3.87 2.987 0 4.029 1.674 4.029 3.454 0 1.312-.52 2.309-1.665 3.55z"/>
+                    </svg>
+                    <span class="ml-2 text-xl font-bold text-white">EcosFala</span>
+                </div>
+                <p class="text-gray-400">Dando voz ao silêncio através da tecnologia de clonagem de voz para crianças não verbais.</p>
       <!-- Blockchain tab (profissional) -->
       <div id="pro-tab-blockchain" style="display:none;">
         <div class="page-header"><h2>Registro em Blockchain</h2><p>Garanta a integridade de relatórios clínicos na rede Sepolia Testnet</p></div>
@@ -921,15 +1537,29 @@
                 <option>Consentimento Clonagem de Voz — Maria Silva</option>
                 <option>Avaliação Cognitiva — Gabriel — Abr/2025</option>
               </select>
-            </div>
+</div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="index3.html" class="text-gray-400 hover:text-white transition duration-300">Início</a></li>
+                    <li><a href="index3.html#como-funciona" class="text-gray-400 hover:text-white transition duration-300">Como Funciona</a></li>
+                    <li><a href="index3.html#beneficios" class="text-gray-400 hover:text-white transition duration-300">Benefícios</a></li>
+                    <li><a href="index3.html#depoimentos" class="text-gray-400 hover:text-white transition duration-300">Depoimentos</a></li>
+                </ul>
             <div class="form-group">
               <label class="form-label" style="color:#94a3b8;">Hash do documento (SHA-256)</label>
               <input type="text" id="chain-input2" class="form-input" style="background:#1e293b;border-color:#334155;color:#e2e8f0;font-family:monospace;" value="a3f8c2d91e4b567890abcdef1234567890abcdef">
-            </div>
+</div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Suporte</h3>
+                <ul class="space-y-2">
+                    <li><a href="index3.html#faq" class="text-gray-400 hover:text-white transition duration-300">Perguntas Frequentes</a></li>
+                    <li><a href="index3.html#contato" class="text-gray-400 hover:text-white transition duration-300">Contato</a></li>
+                </ul>
             <div style="display:flex;gap:.75rem;">
               <button class="btn btn-ghost btn-sm" style="border-color:#334155;color:#94a3b8;" onclick="chainConnect2()"><i class="fab fa-ethereum"></i> Conectar MetaMask</button>
               <button class="btn btn-sm" id="chain-register-btn2" style="background:#1d4ed8;color:#fff;opacity:.5;cursor:not-allowed;" disabled onclick="chainRegister2()"><i class="fas fa-link"></i> Registrar na Blockchain</button>
-            </div>
+</div>
             <div id="chain-result2" style="display:none;margin-top:1rem;">
               <div id="chain-loading2" style="color:#94a3b8;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i> Aguardando confirmação na rede Sepolia...</div>
               <div id="chain-success2" style="display:none;">
@@ -966,7 +1596,9 @@
           <div class="card"><div class="card-icon blue"><i class="fas fa-envelope"></i></div><h3>E-mail Marketing</h3><p>Envie newsletters e atualizações personalizadas para as famílias dos seus pacientes.</p><button class="btn btn-primary btn-sm mt-2" onclick="showToast('Em breve!','success')">Criar campanha</button></div>
           <div class="card"><div class="card-icon teal"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp</h3><p>Integração com WhatsApp Business para lembretes automáticos de sessão.</p><button class="btn btn-teal btn-sm mt-2" onclick="showToast('Em breve!','success')">Configurar</button></div>
           <div class="card"><div class="card-icon amber"><i class="fas fa-sms"></i></div><h3>SMS</h3><p>Envio de lembretes por SMS com confirmação de presença automatizada.</p><button class="btn btn-amber btn-sm mt-2" onclick="showToast('Em breve!','success')">Ativar</button></div>
-        </div>
+</div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 EcosFala. Todos os direitos reservados.</p>
       </div>
 
       <!-- config tab -->
@@ -1002,7 +1634,7 @@
               </label>
             </div>
           </div>
-        </div>
+</div>
       </div>
     </div><!-- /main-content -->
   </div><!-- /app-shell -->
@@ -1026,7 +1658,8 @@
     <div class="form-row">
       <div class="form-group"><label class="form-label">Telefone</label><input class="form-input" placeholder="(84) 99999-9999"></div>
       <div class="form-group"><label class="form-label">Data do contato</label><input class="form-input" type="date"></div>
-    </div>
+</div>
+</footer>
     <div class="form-group"><label class="form-label">Estágio</label>
       <select class="form-select"><option>Prospecção</option><option>Apresentação</option><option>Proposta</option><option>Fechado</option></select>
     </div>
@@ -1037,6 +1670,8 @@
   </div>
 </div>
 
+<!-- ═══════ ethers.js v6 CDN ═══════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 <!-- Activity: AAC -->
 <div class="modal-backdrop" id="modal-aac" style="display:none;" onclick="closeModalById('modal-aac')">
   <div class="modal" style="max-width:720px;" onclick="event.stopPropagation()">
@@ -1129,6 +1764,10 @@
 </div>
 
 <script>
+/* ─── Configuração do contrato ────────────────────────────────────────────
+   O ABI abaixo corresponde ao contrato com a função registrarDado(string).
+──────────────────────────────────────────────────────────────────────── */
+const CONTRACT_ADDRESS = "0x9474DEb6fc71Eed33553Dffe00261E43b7F99f69"; 
 // ════ STATE ════
 const state = {
   currentSection: 'sec-landing',
@@ -1157,6 +1796,24 @@ const state = {
   familyStars: 8,
 };
 
+const CONTRACT_ABI = [
+  {
+    "inputs": [{ "internalType": "string", "name": "_valor", "type": "string" }],
+    "name": "registrarDado",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "internalType": "address", "name": "remetente", "type": "address" },
+      { "indexed": false, "internalType": "string",  "name": "valor",     "type": "string" },
+      { "indexed": false, "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "DadoRegistrado",
+    "type": "event"
+  }
 const aacCards = [
   { emoji:'💧', label:'Água', cat:'necessidades', phrase:'Eu quero água' },
   { emoji:'🍎', label:'Comida', cat:'comida', phrase:'Eu estou com fome' },
@@ -1178,6 +1835,7 @@ const aacCards = [
   { emoji:'🤒', label:'Doendo', cat:'necessidades', phrase:'Estou com dor' },
 ];
 
+const SEPOLIA_CHAIN_ID = "0xaa36a7";
 const seqData = [
   { emoji:'⏰', label:'Acordar', order: 1 },
   { emoji:'🦷', label:'Escovar dentes', order: 2 },
@@ -1206,6 +1864,53 @@ const emotionOptions = [
   { emoji:'😨', label:'Com medo' },
 ];
 
+let w3Provider = null;
+let w3Signer   = null;
+
+function w3El(id) { return document.getElementById(id); }
+
+function w3SetWalletUI(address) {
+  const short = address.slice(0,6) + "..." + address.slice(-4);
+  w3El("w3-dot").style.backgroundColor   = "#22c55e";
+  w3El("w3-wallet-label").textContent    = short;
+  w3El("w3-wallet-label").style.color    = "#15803d";
+  w3El("w3-connect-btn").textContent     = "Conectada";
+  w3El("w3-connect-btn").disabled        = true;
+  w3El("w3-connect-btn").style.background= "#dcfce7";
+  w3El("w3-connect-btn").style.color     = "#15803d";
+  const btn = w3El("w3-register-btn");
+  btn.disabled = false;
+  btn.style.background = "#2563eb";
+  btn.style.color = "#fff";
+  btn.style.cursor = "pointer";
+}
+
+function w3ShowLoading(show) {
+  w3El("w3-result").classList.toggle("hidden", !show);
+  w3El("w3-loading").classList.toggle("hidden", !show);
+  w3El("w3-success").classList.add("hidden");
+  w3El("w3-error").classList.add("hidden");
+}
+
+function w3ShowSuccess(txHash) {
+  w3El("w3-result").classList.remove("hidden");
+  w3El("w3-loading").classList.add("hidden");
+  w3El("w3-success").classList.remove("hidden");
+  w3El("w3-tx-hash").textContent = txHash;
+  w3El("w3-etherscan-link").href = "https://sepolia.etherscan.io/tx/" + txHash;
+}
+
+function w3ShowError(msg) {
+  w3El("w3-result").classList.remove("hidden");
+  w3El("w3-loading").classList.add("hidden");
+  w3El("w3-error").classList.remove("hidden");
+  w3El("w3-error-msg").textContent = msg;
+}
+
+async function w3Connect() {
+  if (!window.ethereum) {
+    alert("MetaMask nao detectada. Instale em metamask.io e recarregue a pagina.");
+    return;
 const sensorialSounds = [
   { emoji:'🌊', label:'Ondas do mar', color:'blue' },
   { emoji:'🌧️', label:'Chuva suave', color:'teal' },
@@ -1402,7 +2107,7 @@ function renderAnalytics() {
         <div class="progress-val" style="color:var(--${c});">${v}%</div>
       </div>
     `).join('');
-  }
+}
 }
 
 function renderVozPhrases() {
@@ -1831,86 +2536,119 @@ const CONTRACT_ABI = [
 const SEPOLIA_CHAIN_ID = "0xaa36a7";
 let w3Provider=null,w3Signer=null;
 
+async function chainConnect() {
+  if (!window.ethereum) { alert("MetaMask não detectada."); return; }
+try {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const chainId = await window.ethereum.request({ method: "eth_chainId" });
+    await window.ethereum.request({method:"eth_requestAccounts"});
+    const chainId = await window.ethereum.request({method:"eth_chainId"});
+if (chainId !== SEPOLIA_CHAIN_ID) {
+      try {
+        await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: SEPOLIA_CHAIN_ID }] });
+      } catch (switchErr) {
+        if (switchErr.code === 4902) {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{ chainId: SEPOLIA_CHAIN_ID, chainName: "Sepolia Test Network",
+              nativeCurrency: { name: "SepoliaETH", symbol: "SEP", decimals: 18 },
+              rpcUrls: ["https://rpc.sepolia.org"], blockExplorerUrls: ["https://sepolia.etherscan.io"] }]
+          });
+        } else { throw switchErr; }
+      }
+      try { await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID}]}); }
+      catch(e) { if(e.code===4902) await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID,chainName:"Sepolia",nativeCurrency:{name:"SEP",symbol:"SEP",decimals:18},rpcUrls:["https://rpc.sepolia.org"],blockExplorerUrls:["https://sepolia.etherscan.io"]}]}); }
+}
+w3Provider = new ethers.BrowserProvider(window.ethereum);
+    w3Signer   = await w3Provider.getSigner();
+    w3SetWalletUI(await w3Signer.getAddress());
+  } catch (err) {
+    alert("Erro ao conectar: " + (err.message || err));
+    w3Signer = await w3Provider.getSigner();
+    const addr = await w3Signer.getAddress();
+    document.getElementById('chain-status-text').textContent = 'Carteira conectada ✓';
+    document.getElementById('chain-wallet').textContent = addr.slice(0,6)+'...'+addr.slice(-4);
+    const rb = document.getElementById('chain-register-btn');
+    rb.disabled=false; rb.style.opacity='1'; rb.style.cursor='pointer';
+  } catch(e) { alert('Erro: ' + e.message); }
+}
+
 async function chainRegister() {
   const val = document.getElementById('chain-input').value.trim();
   if (!val) { alert('Preencha o campo'); return; }
   if (!w3Signer) { alert('Conecte sua carteira primeiro'); return; }
-  
-  const loading = document.getElementById('chain-loading');
-  const success = document.getElementById('chain-success');
-  const resultArea = document.getElementById('chain-result');
-
-  if(resultArea) resultArea.style.display='block';
-  if(loading) loading.style.display='block';
-  if(success) success.style.display='none';
-
+  document.getElementById('chain-result').style.display='block';
+  document.getElementById('chain-loading').style.display='block';
+  document.getElementById('chain-success').style.display='none';
+  document.getElementById('chain-error').style.display='none';
   try {
-    const c = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
+    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
     const tx = await c.registrarDado(val);
     const receipt = await tx.wait(1);
-    const hash = receipt.hash || tx.hash;
-
-    if(loading) loading.style.display='none';
-    if(success) success.style.display='block';
-
-    // Atualiza o texto do Hash
-    const txHashEl = document.getElementById('chain-tx-hash');
-    if(txHashEl) txHashEl.textContent = hash;
-
-    // CORREÇÃO DEFINITIVA: Tenta os dois IDs possíveis para garantir que funcione
-    const link1 = document.getElementById('chain-explorer');
-    const link2 = document.getElementById('w3-etherscan-link');
-    
-    if(link1) link1.href = 'https://sepolia.etherscan.io/tx/' + hash;
-    if(link2) link2.href = 'https://sepolia.etherscan.io/tx/' + hash;
-    
-    showToast("Registrado com sucesso!", "success");
+    const hash = receipt.hash||tx.hash;
+    document.getElementById('chain-loading').style.display='none';
+    document.getElementById('chain-success').style.display='block';
+    document.getElementById('chain-tx-hash').textContent=hash;
+    document.getElementById('chain-etherscan-link').href='https://sepolia.etherscan.io/tx/'+hash;
   } catch(e) {
-    if(loading) loading.style.display='none';
-    const errorEl = document.getElementById('chain-error');
-    if(errorEl) errorEl.style.display='block';
-    const errorMsg = document.getElementById('chain-error-msg');
-    if(errorMsg) errorMsg.textContent = e.reason || e.message || 'Erro';
+    document.getElementById('chain-loading').style.display='none';
+    document.getElementById('chain-error').style.display='block';
+    document.getElementById('chain-error-msg').textContent=e.reason||e.message||'Erro desconhecido';
+}
+}
+
+async function w3Register() {
+  const valor = w3El("w3-input").value.trim();
+  if (!valor) { alert("Preencha o campo com o dado a registrar."); return; }
+  if (!w3Signer) { alert("Conecte sua carteira MetaMask primeiro."); return; }
+  w3ShowLoading(true);
+async function chainConnect2() {
+  await chainConnect();
+  if (w3Signer) {
+    const addr = await w3Signer.getAddress();
+    document.getElementById('chain-status-text2').textContent='Conectada ✓';
+    document.getElementById('chain-wallet2').textContent=addr.slice(0,6)+'...'+addr.slice(-4);
+    const rb=document.getElementById('chain-register-btn2');
+    rb.disabled=false;rb.style.opacity='1';rb.style.cursor='pointer';
   }
 }
 
 async function chainRegister2() {
   const val = document.getElementById('chain-input2').value.trim();
-  if (!val || !w3Signer) return;
-  
-  const loading = document.getElementById('chain-loading2');
-  const success = document.getElementById('chain-success2');
-  const resultArea = document.getElementById('chain-result2');
-
-  if(resultArea) resultArea.style.display='block';
-  if(loading) loading.style.display='block';
-  if(success) success.style.display='none';
-
-  try {
-    const c = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
+  if (!val||!w3Signer) return;
+  document.getElementById('chain-result2').style.display='block';
+  document.getElementById('chain-loading2').style.display='block';
+  document.getElementById('chain-success2').style.display='none';
+  document.getElementById('chain-error2').style.display='none';
+try {
+    const contrato = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
+    const tx = await contrato.registrarDado(valor);
+    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
     const tx = await c.registrarDado(val);
-    const receipt = await tx.wait(1);
-    const hash = receipt.hash || tx.hash;
-
-    if(loading) loading.style.display='none';
-    if(success) success.style.display='block';
-
-    const txHashEl = document.getElementById('chain-tx-hash2');
-    if(txHashEl) txHashEl.textContent = hash;
-
-    const explorerLink = document.getElementById('chain-explorer2');
-    if(explorerLink) {
-      explorerLink.href = 'https://sepolia.etherscan.io/tx/' + hash;
-    }
-    
-    showToast("Relatório registrado!", "success");
+const receipt = await tx.wait(1);
+    w3ShowSuccess(receipt.hash || tx.hash);
+  } catch (err) {
+    let msg = err.reason || err.message || "Erro desconhecido.";
+    if (msg.includes("user rejected")) msg = "Transacao rejeitada pelo usuario na MetaMask.";
+    if (msg.includes("insufficient funds")) msg = "Saldo insuficiente. Obtenha SepoliaETH em sepoliafaucet.com.";
+    w3ShowError(msg);
+    const hash = receipt.hash||tx.hash;
+    document.getElementById('chain-loading2').style.display='none';
+    document.getElementById('chain-success2').style.display='block';
+    document.getElementById('chain-tx-hash2').textContent=hash;
+    document.getElementById('chain-explorer2').href='https://sepolia.etherscan.io/tx/'+hash;
   } catch(e) {
-    if(loading) loading.style.display='none';
-    const errorEl = document.getElementById('chain-error2');
-    if(errorEl) errorEl.style.display='block';
-  }
+    document.getElementById('chain-loading2').style.display='none';
+    document.getElementById('chain-error2').style.display='block';
+    document.getElementById('chain-error-msg2').textContent=e.reason||e.message||'Erro';
+}
 }
 
+if (window.ethereum) {
+  window.ethereum.on("accountsChanged", (accounts) => {
+    if (accounts.length === 0) location.reload();
+    else w3SetWalletUI(accounts[0]);
+  });
 // ════ TOAST ════
 function showToast(msg, type='success') {
   const el = document.getElementById('toast');
