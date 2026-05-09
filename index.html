@@ -1831,80 +1831,81 @@ const CONTRACT_ABI = [
 const SEPOLIA_CHAIN_ID = "0xaa36a7";
 let w3Provider=null,w3Signer=null;
 
-async function chainConnect() {
-  if (!window.ethereum) { alert("MetaMask não detectada."); return; }
-  try {
-    await window.ethereum.request({method:"eth_requestAccounts"});
-    const chainId = await window.ethereum.request({method:"eth_chainId"});
-    if (chainId !== SEPOLIA_CHAIN_ID) {
-      try { await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID}]}); }
-      catch(e) { if(e.code===4902) await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:SEPOLIA_CHAIN_ID,chainName:"Sepolia",nativeCurrency:{name:"SEP",symbol:"SEP",decimals:18},rpcUrls:["https://rpc.sepolia.org"],blockExplorerUrls:["https://sepolia.etherscan.io"]}]}); }
-    }
-    w3Provider = new ethers.BrowserProvider(window.ethereum);
-    w3Signer = await w3Provider.getSigner();
-    const addr = await w3Signer.getAddress();
-    document.getElementById('chain-status-text').textContent = 'Carteira conectada ✓';
-    document.getElementById('chain-wallet').textContent = addr.slice(0,6)+'...'+addr.slice(-4);
-    const rb = document.getElementById('chain-register-btn');
-    rb.disabled=false; rb.style.opacity='1'; rb.style.cursor='pointer';
-  } catch(e) { alert('Erro: ' + e.message); }
-}
-
 async function chainRegister() {
   const val = document.getElementById('chain-input').value.trim();
   if (!val) { alert('Preencha o campo'); return; }
   if (!w3Signer) { alert('Conecte sua carteira primeiro'); return; }
-  document.getElementById('chain-result').style.display='block';
-  document.getElementById('chain-loading').style.display='block';
-  document.getElementById('chain-success').style.display='none';
-  document.getElementById('chain-error').style.display='none';
+  
+  const resultArea = document.getElementById('chain-result');
+  const loading = document.getElementById('chain-loading');
+  const success = document.getElementById('chain-success');
+  
+  if(resultArea) resultArea.style.display='block';
+  if(loading) loading.style.display='block';
+  if(success) success.style.display='none';
+  
   try {
-    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
+    const c = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
     const tx = await c.registrarDado(val);
     const receipt = await tx.wait(1);
-    const hash = receipt.hash||tx.hash;
-    document.getElementById('chain-loading').style.display='none';
-    document.getElementById('chain-success').style.display='block';
-    document.getElementById('chain-tx-hash').textContent=hash;
-    document.getElementById('chain-etherscan-link').href='https://sepolia.etherscan.io/tx/'+hash;
+    const hash = receipt.hash || tx.hash;
+    
+    if(loading) loading.style.display='none';
+    if(success) success.style.display='block';
+    
+    // CORREÇÃO AQUI: Busca o ID correto que está no seu HTML (chain-explorer)
+    const txHashEl = document.getElementById('chain-tx-hash');
+    if(txHashEl) txHashEl.textContent = hash;
+    
+    const explorerLink = document.getElementById('chain-explorer');
+    if(explorerLink) {
+      explorerLink.href = 'https://sepolia.etherscan.io/tx/' + hash;
+    }
+    
+    showToast("Registrado com sucesso!", "success");
   } catch(e) {
-    document.getElementById('chain-loading').style.display='none';
-    document.getElementById('chain-error').style.display='block';
-    document.getElementById('chain-error-msg').textContent=e.reason||e.message||'Erro desconhecido';
-  }
-}
-
-async function chainConnect2() {
-  await chainConnect();
-  if (w3Signer) {
-    const addr = await w3Signer.getAddress();
-    document.getElementById('chain-status-text2').textContent='Conectada ✓';
-    document.getElementById('chain-wallet2').textContent=addr.slice(0,6)+'...'+addr.slice(-4);
-    const rb=document.getElementById('chain-register-btn2');
-    rb.disabled=false;rb.style.opacity='1';rb.style.cursor='pointer';
+    if(loading) loading.style.display='none';
+    const errorEl = document.getElementById('chain-error');
+    if(errorEl) errorEl.style.display='block';
+    const errorMsg = document.getElementById('chain-error-msg');
+    if(errorMsg) errorMsg.textContent = e.reason || e.message || 'Erro na transação';
   }
 }
 
 async function chainRegister2() {
   const val = document.getElementById('chain-input2').value.trim();
-  if (!val||!w3Signer) return;
-  document.getElementById('chain-result2').style.display='block';
-  document.getElementById('chain-loading2').style.display='block';
-  document.getElementById('chain-success2').style.display='none';
-  document.getElementById('chain-error2').style.display='none';
+  if (!val || !w3Signer) return;
+  
+  const loading = document.getElementById('chain-loading2');
+  const success = document.getElementById('chain-success2');
+  const resultArea = document.getElementById('chain-result2');
+
+  if(resultArea) resultArea.style.display='block';
+  if(loading) loading.style.display='block';
+  if(success) success.style.display='none';
+
   try {
-    const c = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,w3Signer);
+    const c = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, w3Signer);
     const tx = await c.registrarDado(val);
     const receipt = await tx.wait(1);
-    const hash = receipt.hash||tx.hash;
-    document.getElementById('chain-loading2').style.display='none';
-    document.getElementById('chain-success2').style.display='block';
-    document.getElementById('chain-tx-hash2').textContent=hash;
-    document.getElementById('chain-explorer2').href='https://sepolia.etherscan.io/tx/'+hash;
+    const hash = receipt.hash || tx.hash;
+
+    if(loading) loading.style.display='none';
+    if(success) success.style.display='block';
+
+    const txHashEl = document.getElementById('chain-tx-hash2');
+    if(txHashEl) txHashEl.textContent = hash;
+
+    const explorerLink = document.getElementById('chain-explorer2');
+    if(explorerLink) {
+      explorerLink.href = 'https://sepolia.etherscan.io/tx/' + hash;
+    }
+    
+    showToast("Relatório registrado!", "success");
   } catch(e) {
-    document.getElementById('chain-loading2').style.display='none';
-    document.getElementById('chain-error2').style.display='block';
-    document.getElementById('chain-error-msg2').textContent=e.reason||e.message||'Erro';
+    if(loading) loading.style.display='none';
+    const errorEl = document.getElementById('chain-error2');
+    if(errorEl) errorEl.style.display='block';
   }
 }
 
